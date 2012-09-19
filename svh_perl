@@ -1,0 +1,57 @@
+" mapppings and abbreviations for Perl
+"
+" Sven Hergenhahn
+
+
+" automatisch Syntax überprüfen:
+" au BufWritePost *.pl,*.pm !perl -c %
+
+"
+" string generieren, mark setzen (ma), an den anfang springen (3k0), visuell markieren (v'a) und autoformat (=), 
+" an Stelle springen, insert mode
+
+" sub
+map _s o<esc>50i#<esc>osub {<esc>o<esc>50i#<esc>o<tab>my () = @_;<return>}<esc>ma3k0v'a=f{i
+"imap _s _s
+
+" for-Schleife
+map _f ofor my $ (@) {<return><tab><return>}<esc>ma2k0v'a=f$a
+"imap _f _f
+
+" while
+map _w owhile (X) {<return><tab><return>}<esc>ma2k0v'a=fXxi
+"imap _w _w
+
+" if
+map _i oif (X) {<return><tab><return>}<esc>ma2k0v'a=fXxi
+"imap _i _i
+
+" if-else
+map _ie oif (X) {<return><tab><return>}<return>else {<return><return>}<esc>ma5k0v'a=fXxi
+"imap _ie _ie
+
+" if-elsif-else
+map _iee oif (X) {<return><tab><return>}<return>elsif () {<return><tab><return>}<return>else {<return><return>}<esc>ma8k0v'a=fXxi
+"imap _iee _iee
+
+
+" getopt
+map _g ma:r/home/svenh/dev/tpl/getopt.tpl<cr>g'a
+"imap _g _gi
+
+" log4perl
+map _l ma:r/home/svenh/dev/tpl/l4p.tpl<cr>g'a
+"imap _l _li
+
+" log4perl_simple
+map _le ma:r/home/svenh/dev/tpl/l4p_simple.tpl<cr>g'a
+"imap _le _lei
+
+" DataDumper
+map _DD omk?useouse Data::Dumper;'kiprint Dumper(\);hi
+"imap _DD _DD
+
+
+set makeprg=$HOME/.vim/perl/vimparse.pl\ -c\ %\ $*
+set errorformat=%f:%l:%m
+

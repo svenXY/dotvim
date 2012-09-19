@@ -1,0 +1,2 @@
+bexec-v0.3.vba: call delete('/home/svenh/.vim/plugin/bexec.vim')|call delete('/home/svenh/.vim/doc/bexec.txt')
+supertab.vmb: call delete('/home/svenh/.vim/doc/supertab.txt')|call delete('/home/svenh/.vim/plugin/supertab.vim')
