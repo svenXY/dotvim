@@ -8,7 +8,10 @@
 "
 "
 " PATHOGEN 
-call pathogen#infect()
+" others should work as well; call pathogen#infect()
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+
 autocmd vimenter * if !argc() | NERDTree | endif
 map <silent> <F4>  :NERDTreeToggle<CR>
 "-------------------------------------------------------------------------------

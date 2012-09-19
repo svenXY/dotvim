@@ -1,0 +1,36 @@
+[submodule "bundle/ttcoach"]
+	path = bundle/ttcoach
+	url = https://github.com/vim-scripts/TTCoach.git
+[submodule "bundle/pyflakes"]
+	path = bundle/pyflakes
+	url = https://github.com/kevinw/pyflakes-vim.git
+[submodule "bundle/snipmate"]
+	path = bundle/snipmate
+	url = https://github.com/msanders/snipmate.vim.git
+[submodule "bundle/vimcommander"]
+	path = bundle/vimcommander
+	url = https://github.com/vim-scripts/vimcommander.git
+[submodule "bundle/bexec"]
+	path = bundle/bexec
+	url = https://github.com/vim-scripts/Bexec.git
+[submodule "bundle/supertab"]
+	path = bundle/supertab
+	url = https://github.com/ervandew/supertab.git
+[submodule "bundle/buftabs"]
+	path = bundle/buftabs
+	url = https://github.com/vim-scripts/buftabs.git
+[submodule "bundle/pydoc"]
+	path = bundle/pydoc
+	url = https://github.com/parantapa/pydoc.vim.git
+[submodule "bundle/taglist"]
+	path = bundle/taglist
+	url = https://github.com/vim-scripts/taglist.vim.git
+[submodule "bundle/cf3"]
+	path = bundle/cf3
+	url = https://github.com/neilhwatson/vim_cf3.git
+[submodule "bundle/nerdtree"]
+	path = bundle/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
+[submodule "bundle/vcscommand"]
+	path = bundle/vcscommand
+	url = https://github.com/vim-scripts/vcscommand.vim.git
