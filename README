@@ -1,4 +1,4 @@
-my personal vimdot files (see the vimcast on vimcast.org for details)
+My personal vimdot files (see the vimcast on vimcast.org for details)
 
 To get it, delete or move out of the way your  ~/.vim directory.
 
@@ -8,3 +8,7 @@ git clone https://github.com/svenXY/dotvim.git ~/.vim
 
 ln -s ~/.vim/vimrc ~/.vimrc
 # ln -s ~/.vim/gvimrc ~/.gvimrc
+
+# make sure all helpfiles are tagged 
+for i in ~/.vim/bundle/*/doc; do vim -c "helptags $i/" -c q; done
+

@@ -1,0 +1,6 @@
+*dummy.txt*   dummy doc file for vim.      #version#
+
+CONTENT                                                *dummy-is-here* 
+=============================================================================
+vim: ft=help
+
