@@ -1,1 +1,10 @@
 my personal vimdot files (see the vimcast on vimcast.org for details)
+
+To get it, delete or move out of the way your  ~/.vim directory.
+
+Then:
+
+git clone https://github.com/svenXY/dotvim.git ~/.vim
+
+ln -s ~/.vim/vimrc ~/.vimrc
+# ln -s ~/.vim/gvimrc ~/.gvimrc
