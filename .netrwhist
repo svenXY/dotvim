@@ -1,8 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/home/svenh/dev/rz2012/svn/CFEngine/trunk/masterfiles/inputs'
-let g:netrw_dirhist_2='/home/svenh/.mozilla'
-let g:netrw_dirhist_3='/home/svenh/.mozilla/firefox'
-let g:netrw_dirhist_4='/home/svenh/.mozilla/firefox/6l9yujrz.default'
-let g:netrw_dirhist_5='/home/svenh/.mozilla/firefox/6l9yujrz.default/chrome'
-let g:netrw_dirhist_6='/home/svenh/dev/rz2012/svn/CFEngine/trunk/masterfiles/inputs'
