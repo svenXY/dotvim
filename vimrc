@@ -8,8 +8,8 @@
 "
 "
 " PATHOGEN 
-" others should work as well; call pathogen#infect()
-call pathogen#runtime_append_all_bundles()
+call pathogen#infect()
+"call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
 autocmd vimenter * if !argc() | NERDTree | endif
@@ -622,6 +622,8 @@ map <F7> :RunPyBuffer<CR>
 
 " cfengine stuff
 au BufRead,BufNewFile *.cf set ft=cf3
+
+" reread docfiles, although most should now be in bundles
 :helptags ~/.vim/doc/
 
 autocmd FileType cf3 set tabstop=2 shiftwidth=2 smarttab expandtab softtabstop=2 autoindent
@@ -683,3 +685,9 @@ hi DiffDelete   ctermfg=0 ctermbg=1 guibg='red'
 hi DiffChange   ctermfg=0 ctermbg=3 guibg='yellow'
 
 
+" Bubble single lines
+nmap <C-Up> [e
+nmap <C-Down> ]e
+" Bubble multiple lines
+vmap <C-Up> [egv
+vmap <C-Down> ]egv
