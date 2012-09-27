@@ -1,7 +1,3 @@
-[submodule "bundle/ttcoach"]
-	path = bundle/ttcoach
-	url = https://github.com/vim-scripts/TTCoach.git
-	ignore = dirty
 [submodule "bundle/pyflakes"]
 	path = bundle/pyflakes
 	url = https://github.com/kevinw/pyflakes-vim.git
