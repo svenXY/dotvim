@@ -12,8 +12,11 @@ call pathogen#infect()
 "call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
+" set the leader
+let mapleader = ","
+
 autocmd vimenter * if !argc() | NERDTree | endif
-map <silent> <F4>  :NERDTreeToggle<CR>
+nnoremap <silent> <F4>  :NERDTreeToggle<CR>
 "-------------------------------------------------------------------------------
 " Vi-Kompatibilität
 "-------------------------------------------------------------------------------
@@ -113,6 +116,7 @@ set nobackup
 " Such- und Ersetzungs-Optionen
 "-------------------------------------------------------------------------------
 
+set grepprg=ack-grep
 " Beim Suchen über Textanfang/ende hinausspringen
 " (Meldung: "Suche erreichte ANFANG/ENDE und wurde am ENDE/ANFANG fortgesetzt")
 set wrapscan
@@ -393,17 +397,17 @@ set esckeys
 
 " Beim "Pasten" von Text aus anderem Fenster vorher alle Sonderfunktionen
 " abschalten mit <F9> und danach wieder einschalten mit <F10>
-map <F9> :set paste!<bar>set paste?<CR>
-imap <F9> <C-O>:set paste!<CR>
+nnoremap <F9> :set paste!<bar>set paste?<CR>
+inoremap <F9> <C-O>:set paste!<CR>
 
-map <F11> :set hls!<bar>set hls?<CR>
+nnoremap <F11> :set hls!<bar>set hls?<CR>
 " map <F10> :set number!<bar>set number?<CR>
 nnoremap <F10> :set number!<CR>:set foldcolumn=0<CR>
 
 " Durch mehrere Dateien springen
 " (+=nächste Datei, -=vorherige, #=aktuelle schreiben und zu nächster springen)
-map + :n<CR>
-map - :prev<CR>
+nnoremap + :n<CR>
+nnoremap - :prev<CR>
 "map # :w<CR>:n<CR>
 
 " Wort suchen (erstes STRG-W startet Wort-Eingabe, zweites STRG-W startet Suche)
@@ -416,13 +420,13 @@ map - :prev<CR>
 " map F /^.\{81\}<CR>
 
 " Ungewöhnliche Zeichen suchen (außerhalb ASCII-Bereich und Umlauten)
-map X <ESC>/[^ -~äöüÄÖÜß]<CR>
-map Y <ESC>:nohl<CR>
+nnoremap X <ESC>/[^ -~äöüÄÖÜß]<CR>
+nnoremap Y <ESC>:nohl<CR>
 
 " Absatzumbruch auf 80 Zeichen Breite (im Vim direkt mit "gq..." möglich)
-map K !}fmt -80 -u<CR>
-map K !}fmt -75 -u<CR>
-map K !}fmt -70 -u<CR>
+nnoremap K !}fmt -80 -u<CR>
+nnoremap K !}fmt -75 -u<CR>
+nnoremap K !}fmt -70 -u<CR>
 
 " MSDOS/UNIX-Dateiformat aktivieren
 "map D :set ff=dos<CR>
@@ -434,7 +438,7 @@ map K !}fmt -70 -u<CR>
 
 " Versehentliches Einschalten des "Ex-Modus" mit "Q" verhindern,
 " statt dessen Objekt "neu formatieren" (Objekt wjG)... danach noch angeben)
-map Q gq
+nnoremap Q gq
 
 "-------------------------------------------------------------------------------
 " Eigene Abkürzungen (teilweise deaktiviert)
@@ -459,14 +463,14 @@ map Q gq
 " * Vor Funktionsaufrufen "call" verwenden (oder in Ausdruck verwenden)
 " * Zum Einrücken KEINE TABs verwenden!
 "-------------------------------------------------------------------------------
-map <F1>  :call ToggleListMode()<CR>
+nnoremap <F1>  :call ToggleListMode()<CR>
 " nedded otherwise! map <F2>  :call ToggleWrapMode()<CR>
 " Wort suchen (erstes <F3> startet Wort-Eingabe, zweites <F3> startet Suche)
-map <F3> /\<
+nnoremap <F3> /\<
 map! <F3> \>/<CR>
 
 nmap     <silent> <unique> <F2> :call Bexec()<CR>
-vmap     <silent> <unique> <F2> :call BexecVisual()<CR>
+vnoremap     <silent> <unique> <F2> :call BexecVisual()<CR>
 
 
 " Option "list" aktiv oder nicht? -> Invertieren
@@ -486,11 +490,11 @@ function ToggleWrapMode()
 endfunction
 
 " Svens maps n stuff
-map sD :r!date<cr>0i# Datum<tab><tab><esc>0
-map sA o# Autor<tab><tab>Sven Hergenhahn<esc>0
-map sF o# Datei<tab><tab><c-r>%<esc>0
-map sC o<esc>79i#<esc>0
-map sS sCsFsAsDsCo<cr>
+nnoremap sD :r!date<cr>0i# Datum<tab><tab><esc>0
+nnoremap sA o# Autor<tab><tab>Sven Hergenhahn<esc>0
+nnoremap sF o# Datei<tab><tab><c-r>%<esc>0
+nnoremap sC o<esc>79i#<esc>0
+nnoremap sS sCsFsAsDsCo<cr>
 
 "# markiere Funktion (visual)
 "map F 0mqf{%v'q
@@ -504,7 +508,7 @@ endfunction
 noremap ,5 1GvG= 
 
 " Bufferliste
-map   <F5> :ls<CR>:e #
+nnoremap   <F5> :ls<CR>:e #
 
 " Alle Register anzeigen, nach Auswahl einfuegen
 fu! RegList()
@@ -513,7 +517,7 @@ fu! RegList()
 	execute "normal \"".A."p<return>"
 endfunction
 
-map <F6> :call RegList()<cr>
+nnoremap <F6> :call RegList()<cr>
 
 
 "map C :call CommentPerl()<CR>
@@ -550,8 +554,8 @@ command!          RunPerl call RunCmd("/usr/bin/perl")
 
 
 " make tab in v mode ident code
-vmap <tab> >gv
-vmap <s-tab> <gv
+vnoremap <tab> >gv
+vnoremap <s-tab> <gv
 
 " Tidy selected lines (or entire file) with _t:
 nnoremap <silent> _t :%!perltidy -q<Enter>
@@ -561,7 +565,7 @@ vnoremap <silent> _t :!perltidy -q<Enter>
 noremap % V% 
 
 " aspell
-map  :w!<CR>:!aspell check %<CR>:e! %<CR>
+nnoremap  :w!<CR>:!aspell check %<CR>:e! %<CR>
 "map  \1\2<CR>:e! %<CR>
 "map \1 :w!<CR>
 "map \2 :!newsbody -qs -n % -p aspell check \%f<CR>
@@ -575,15 +579,15 @@ let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1 
-map <Leader>p :MiniBufExplorer<cr>
+nnoremap <Leader>p :MiniBufExplorer<cr>
 " Zum nächsten Fenster wechseln:
-map <C-j> :MBEbn<CR>
+nnoremap <C-j> :MBEbn<CR>
 " " Zum vorherigen Fenster wechseln:
-map <C-k> :MBEbp<CR>
+nnoremap <C-k> :MBEbp<CR>
 
 " TaskList & TagList
-map T :TaskList<CR>
-map _t :TlistToggle<CR>
+nnoremap T :TaskList<CR>
+nnoremap _t :TlistToggle<CR>
 
 " no swap file (tilde files)
 " set uc=0
@@ -618,7 +622,7 @@ fu! DoRunPyBuffer2()
 endfu
 
 command! RunPyBuffer call DoRunPyBuffer2()
-map <F7> :RunPyBuffer<CR>
+nnoremap <F7> :RunPyBuffer<CR>
 
 " cfengine stuff
 au BufRead,BufNewFile *.cf set ft=cf3
@@ -689,5 +693,21 @@ hi DiffChange   ctermfg=0 ctermbg=3 guibg='yellow'
 nmap <C-Up> [e
 nmap <C-Down> ]e
 " Bubble multiple lines
-vmap <C-Up> [egv
-vmap <C-Down> ]egv
+vnoremap <C-Up> [egv
+vnoremap <C-Down> ]egv
+
+:nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+:nnoremap <leader>sv :source $MYVIMRC<cr>
+
+" map jk to <esc>
+:inoremap jk <esc>
+
+" noop arrow keys
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
