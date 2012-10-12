@@ -703,7 +703,7 @@ vnoremap <C-Down> ]egv
 :inoremap jk <esc>
 
 " noop arrow keys
-nnoremap <up> <nop>
+nnoremap <up> :echo "stupid"<cr>
 nnoremap <down> <nop>
 nnoremap <left> <nop>
 nnoremap <right> <nop>

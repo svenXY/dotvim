@@ -50,3 +50,7 @@
 	path = bundle/ack
 	url = https://github.com/mileszs/ack.vim.git
 	ignore = dirty
+[submodule "bundle/gummybears-colorscheme"]
+	path = bundle/gummybears-colorscheme
+	url = https://github.com/dbb/vim-gummybears-colorscheme.git
+	ignore = dirty
