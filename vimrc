@@ -15,7 +15,8 @@ call pathogen#helptags()
 " set the leader
 let mapleader = ","
 
-autocmd vimenter * if !argc() | NERDTree | endif
+" open Nertree on startup if no argument - sucks in large homedir
+" autocmd vimenter * if !argc() | NERDTree | endif
 nnoremap <silent> <F4>  :NERDTreeToggle<CR>
 "-------------------------------------------------------------------------------
 " Vi-Kompatibilität
@@ -116,7 +117,7 @@ set nobackup
 " Such- und Ersetzungs-Optionen
 "-------------------------------------------------------------------------------
 
-set grepprg=ack-grep
+set grepprg=ack-grep\ -H\ --nocolor\ --nogroup
 " Beim Suchen über Textanfang/ende hinausspringen
 " (Meldung: "Suche erreichte ANFANG/ENDE und wurde am ENDE/ANFANG fortgesetzt")
 set wrapscan
@@ -704,10 +705,29 @@ vnoremap <C-Down> ]egv
 
 " noop arrow keys
 nnoremap <up> :echo "stupid"<cr>
-nnoremap <down> <nop>
-nnoremap <left> <nop>
-nnoremap <right> <nop>
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
-inoremap <right> <nop>
+nnoremap <down> :echo "stupid"<cr>
+nnoremap <left> :echo "stupid"<cr>
+nnoremap <right> :echo "stupid"<cr>
+inoremap <up> <esc>:echo "stupid"<cr>
+inoremap <down> <esc>:echo "stupid"<cr>
+inoremap <left> <esc>:echo "stupid"<cr>
+inoremap <right> <esc>:echo "stupid"<cr>
+
+nnoremap <leader>#l :execute "rightbelow vsplit " . bufname("#")<cr>
+nnoremap <leader>#h :execute "leftabove vsplit " . bufname("#")<cr>
+nnoremap <leader>#j :execute "rightbelow split " . bufname("#")<cr>
+nnoremap <leader>#k :execute "leftabove split " . bufname("#")<cr>
+
+nnoremap <leader>w :match Error /\v\s+$/<cr>
+nnoremap <leader>W :match<cr>
+nnoremap <leader># :nohl<cr>
+
+" buftabs settings
+set laststatus=2
+:let g:buftabs_in_statusline=1
+" set statusline=%=buffers:\ %{buftabs#statusline()}
+
+:set statusline+=%=        " Switch to the right side
+:set statusline+=%l        " Current line
+:set statusline+=/         " Separator
+:set statusline+=%L        " Total lines
