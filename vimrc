@@ -1,6 +1,7 @@
+"
 "-------------------------------------------------------------------------------
 " "~/.vimrc" Konfigurations-Datei fuer den Vim   (C) 2005 T.Birnthaler OSTC GmbH
-" (analog "~/.exrc" für den echten Vi und "~/.gvimrc für Gvim)
+" (analog "~/.exrc" fÃ¼r den echten Vi und "~/.gvimrc fÃ¼r Gvim)
 "-------------------------------------------------------------------------------
 " Kommentar wird durch " eingeleitet (nur am Zeilenanfang erlaubt!)
 " ACHTUNG: Bei manchen Vi's keine Leerzeile erlaubt! => " Kommentar nehmen
@@ -19,13 +20,13 @@ let mapleader = ","
 " autocmd vimenter * if !argc() | NERDTree | endif
 nnoremap <silent> <F4>  :NERDTreeToggle<CR>
 "-------------------------------------------------------------------------------
-" Vi-Kompatibilität
+" Vi-KompatibilitÃ¤t
 "-------------------------------------------------------------------------------
-" VIM-Zusätze aktivieren (NICHT vi-kompatibles Verhalten!)
+" VIM-ZusÃ¤tze aktivieren (NICHT vi-kompatibles Verhalten!)
 set nocompatible
 
-" Eine Vi-Standard-Verhalten doch aktivieren (es gibt über 40 Optionen dafür!)
-" $ = "$" an Ende des mit "c" zu ändernden Textes setzen statt ihn löschen
+" Eine Vi-Standard-Verhalten doch aktivieren (es gibt Ã¼ber 40 Optionen dafÃ¼r!)
+" $ = "$" an Ende des mit "c" zu Ã¤ndernden Textes setzen statt ihn lÃ¶schen
 " set cpoptions+=$
 
 "-------------------------------------------------------------------------------
@@ -34,7 +35,7 @@ set nocompatible
 " Editmodus-Anzeige in Statuszeile (rechts oder links unten)
 set showmode
 
-" Hinweis in Statuszeile ab N geänderte/gelöschte/eingefügte Zeilen
+" Hinweis in Statuszeile ab N geÃ¤nderte/gelÃ¶schte/eingefÃ¼gte Zeilen
 set report=0
 
 " Kommando-Wiederholungsfaktoren und Teilkommandos in Statuszeile anzeigen
@@ -47,7 +48,7 @@ set ruler
 " set statusline=...
 " set rulerformat=...
 
-" Datei-Titel in xterm-Titelzeile anzeigen (nicht in allen Terminals mögl.)
+" Datei-Titel in xterm-Titelzeile anzeigen (nicht in allen Terminals mÃ¶gl.)
 set title
 
 " Zeilen NICHT nummeriert darstellen
@@ -56,7 +57,7 @@ set nonumber
 " Tabulator und Zeilenende NICHT anzeigen (siehe lcs = listchars)
 set nolist
 
-" Texte für Anzeige im 'list'-Modus (2 Zeichen bei "tab"!)
+" Texte fÃ¼r Anzeige im 'list'-Modus (2 Zeichen bei "tab"!)
 " tab      = Tabulator von Whitespace unterscheiden (1. + folgendes Zeichen)
 " trail    = Leerzeichen am Zeilenende
 " eol      = Zeilenende (normal "$")
@@ -64,13 +65,13 @@ set nolist
 " extends  = Zeichen in letzter Spalte falls "nowrap" und Zeile zu lang
 "set listchars=tab:>.,trail:.,eol:$,precedes:>,extends:<
 
-" Zeilen länger als Bildschirmbreite NICHT in nächste Zeile "umbrechen"
+" Zeilen lÃ¤nger als Bildschirmbreite NICHT in nÃ¤chste Zeile "umbrechen"
 " (sondern "Scrollen")
 "set wrap
 "set nowrap
 
-" Bei Zeilen länger als Bildschirmbreite:
-" * 1 Zeichen breit scrollen, falls Rand erreicht (schnelles Terminal nötig)
+" Bei Zeilen lÃ¤nger als Bildschirmbreite:
+" * 1 Zeichen breit scrollen, falls Rand erreicht (schnelles Terminal nÃ¶tig)
 " * Mindestens Rand der Breite "sidescrolloff" als Kontextinfo sichtbar lassen
 "set sidescroll=1
 "set sidescrolloff=0
@@ -79,7 +80,7 @@ set nolist
 set noerrorbells
 set visualbell
 
-" Zeilenanfangmarkierung für zu lange Zeilen, die umgebrochen dargestellt werden
+" Zeilenanfangmarkierung fÃ¼r zu lange Zeilen, die umgebrochen dargestellt werden
 "set showbreak=>
 
 "-------------------------------------------------------------------------------
@@ -90,7 +91,7 @@ set visualbell
 "set linebreak
 " set breakat
 
-" Bildschirmrand, innerhalb dem während Texteingabe umgebrochen wird (0=aus)
+" Bildschirmrand, innerhalb dem wÃ¤hrend Texteingabe umgebrochen wird (0=aus)
 "set wrapmargin=1
 set wrapmargin=0
 
@@ -99,14 +100,14 @@ set wrapmargin=0
 "-------------------------------------------------------------------------------
 
 " Automatisch zu erkennende Dateiformate auflisten (auch set ff=...)
-" Format (Zeilenende) gemäß Dateiinhalt beibehalten, NICHT festlegen set
+" Format (Zeilenende) gemÃ¤ÃŸ Dateiinhalt beibehalten, NICHT festlegen set
 set fileformats=unix,dos,mac
 
 " Dateiformat (Zeilenende) beibehalten, NICHT festlegen (auch set ff=...)
 " set fileformat=dos|unix|mac
 
 " Mode-Zeilen am Dateianfang/Ende ignorieren (Security!)
-" Anzahl erlaubter Zeilen für "modeline" ist LEER
+" Anzahl erlaubter Zeilen fÃ¼r "modeline" ist LEER
 set nomodeline
 set modelines=0
 
@@ -118,17 +119,17 @@ set nobackup
 "-------------------------------------------------------------------------------
 
 set grepprg=ack-grep\ -H\ --nocolor\ --nogroup
-" Beim Suchen über Textanfang/ende hinausspringen
+" Beim Suchen Ã¼ber Textanfang/ende hinausspringen
 " (Meldung: "Suche erreichte ANFANG/ENDE und wurde am ENDE/ANFANG fortgesetzt")
 set wrapscan
 
-" Suche NICHT case-senitiv, außer ein Grossbuchstabe steht im Suchmuster
+" Suche NICHT case-senitiv, auÃŸer ein Grossbuchstabe steht im Suchmuster
 " SmartCase, SMARTcase, smartCASE, SmArTcAsE, sMaRtCaSe, smartcase
 set ignorecase
 set smartcase
 
-" Während Eingabe eines Suchmusters bereits suchen (inkrementell)
-" Alle zu einem Suchmuster passenden Textstücke markieren (highlight)
+" WÃ¤hrend Eingabe eines Suchmusters bereits suchen (inkrementell)
+" Alle zu einem Suchmuster passenden TextstÃ¼cke markieren (highlight)
 " :nohlsearch schaltet Markierungen wieder ab
 set incsearch
 set hlsearch
@@ -147,33 +148,33 @@ set shiftwidth=4
 " Eingegebene Tabulatoren NICHT zu Leerzeichen expandieren
 set noexpandtab
 
-" Zeige zugeh. öffnende Klammer "([{<" bei Eingabe der korresp. Schließenden
+" Zeige zugeh. Ã¶ffnende Klammer "([{<" bei Eingabe der korresp. SchlieÃŸenden
 set showmatch
 
-" Klammern, die "%" berücksichtigt (Sprung auf korrespondierende Klammer)
+" Klammern, die "%" berÃ¼cksichtigt (Sprung auf korrespondierende Klammer)
 set matchpairs=(:),[:],{:},<:>
 
-" NICHT automatisch einrücken (Ausrichtung an voriger Zeile)
-" (STRG-T rückt um 1 Stufe ein, STRG-D rückt um 1 Stufe aus)
+" NICHT automatisch einrÃ¼cken (Ausrichtung an voriger Zeile)
+" (STRG-T rÃ¼ckt um 1 Stufe ein, STRG-D rÃ¼ckt um 1 Stufe aus)
 set autoindent
 set smartindent
 set nocopyindent
 set nopreserveindent
 
-" Automatisch Einrückung für C-Programme NICHT aktivieren
+" Automatisch EinrÃ¼ckung fÃ¼r C-Programme NICHT aktivieren
 set nocindent
 
 "-------------------------------------------------------------------------------
 " Syntax-Highlighting
 "-------------------------------------------------------------------------------
 
-" Syntax-Highlighting einschalten (abhängig von Datei-Endung / Shee-Bang-Zeile)
+" Syntax-Highlighting einschalten (abhÃ¤ngig von Datei-Endung / Shee-Bang-Zeile)
 " ("enable" statt "on" macht was anderes!)
 "syntax off
 syntax on
 
 " Syntaxcoloring-Farb-Schema (stehen in $VIMRUNTIME/colors)
-" (16 Stück: blue, darkblue, default, desert, elflord, evening, koehler,
+" (16 StÃ¼ck: blue, darkblue, default, desert, elflord, evening, koehler,
 "            morning, murphy, pablo, peachpuff, ron, shine, torte, zellner)
 " TIPP: Auflisten mit: :colo TAB...
 colorscheme peachpuff
@@ -184,16 +185,16 @@ colorscheme peachpuff
 set background=light
 "set background=dark
 
-" Dateityp festlegen (für Syntax-Highlighting, Autokommandos, ...)
+" Dateityp festlegen (fÃ¼r Syntax-Highlighting, Autokommandos, ...)
 " (normalerweise durch "Extension" oder "Shee-Bang-Zeile" festgelegt)
-" Dateityp-Erkennung (Einrücken, Plugins auch)
+" Dateityp-Erkennung (EinrÃ¼cken, Plugins auch)
 "set filetype on
 "set filetype indent on
 "set filetype plugin on
 "set omnifunc=...
 
 "-------------------------------------------------------------------------------
-" Farben für Syntax-Highlighting selber definieren
+" Farben fÃ¼r Syntax-Highlighting selber definieren
 "-------------------------------------------------------------------------------
 
 " Statement-Elemente dunkelblau statt gelb (sonst schwer lesbar!)
@@ -202,13 +203,13 @@ hi statement ctermfg=darkblue guifg=black
 " Variablen schwarz statt gelb (sonst schwer lesbar!)
 hi identifier ctermfg=black guifg=black
 
-" Mögliche Farben:
+" MÃ¶gliche Farben:
 " Black, DarkBlue, DarkGreen, DarkCyan, DarkRed, DarkMagenta, Brown, DarkYellow,
 " LightGray, LightGrey, Gray, Grey, DarkGray, DarkGrey, Blue, LightBlue
 " Green, LightGreen, Cyan, LightCyan, Red, LightRed, Magenta, LightMagenta
 " Yellow, LightYellow, White
 "
-" Mögliche Syntax-Gruppen:
+" MÃ¶gliche Syntax-Gruppen:
 " Comment, Constant, Identifier, Statement, PreProc, Type, Special, Underlined
 " Ignore, Error, Todo
 "
@@ -248,7 +249,7 @@ hi identifier ctermfg=black guifg=black
 " Falten NICHT aktivieren
 set nofoldenable
 
-" Spaltenbreite zur Faltungsanzeige (z.B. für Faltungstiefe, -bereich)
+" Spaltenbreite zur Faltungsanzeige (z.B. fÃ¼r Faltungstiefe, -bereich)
 set foldcolumn=2
 set foldcolumn=0
 
@@ -274,7 +275,7 @@ set foldmethod=manual
 " Beim Falten zu ignorierende Zeilen (Kommentare)
 set foldignore=#
 
-" Text für Darstellung einer Faltung (Std)
+" Text fÃ¼r Darstellung einer Faltung (Std)
 set foldtext=foldtext()
 
 "-------------------------------------------------------------------------------
@@ -287,7 +288,7 @@ set foldtext=foldtext()
 " Maus-Klick aktiviert Fenster bei Verwendung mehrerer Windows im Vim (STRG-W)
 " #set mousefocus
 
-" Maus während dem Eintippen verstecken
+" Maus wÃ¤hrend dem Eintippen verstecken
 set mousehide
 
 " Wirkung der Maustasten ("extend", "popup", "popup_setpos")
@@ -296,14 +297,14 @@ set mousehide
 " Aussehen der Maus (geht nur im "gvim")
 " set mouseshape=
 
-" Maximal erlaubte Doppelklick-Verzögerung (in ms, Std: 500)
+" Maximal erlaubte Doppelklick-VerzÃ¶gerung (in ms, Std: 500)
 set mousetime=250
 
 "-------------------------------------------------------------------------------
 " Drucker-Einstellungen
 "-------------------------------------------------------------------------------
 
-" Ohne Syntaxfärbung, mit Zeilennummern
+" Ohne SyntaxfÃ¤rbung, mit Zeilennummern
 set printoptions=syntax:n,number:y
 
 " Font: Courier 8 Punkte
@@ -314,16 +315,16 @@ set printfont=courier:h8
 "-------------------------------------------------------------------------------
 
 " Was soll in ".viminfo"-Datei gespeichert werden?
-" '50 = Marken für die maximal letzten 50 Dateien speichern
+" '50 = Marken fÃ¼r die maximal letzten 50 Dateien speichern
 " "50 = Maximal 50 Zeilen pro Register a-z speichern
-" h   = hlsearch beim Öffnen einer Datei abschalten
+" h   = hlsearch beim Ã–ffnen einer Datei abschalten
 set viminfo=\'50,\"50,h
 
-" Am Zeilenanfang/ende nur mit einigen Tasten zur vorh./nächste Zeile bewegen
+" Am Zeilenanfang/ende nur mit einigen Tasten zur vorh./nÃ¤chste Zeile bewegen
 " (Std: b,s = Backspace, Space)
 set whichwrap="b,s"
 
-" Automatische Text-Vervollständigung (mit STRG-P / STRG-N / STRG-X + ...) holt
+" Automatische Text-VervollstÃ¤ndigung (mit STRG-P / STRG-N / STRG-X + ...) holt
 " woher ihre Daten?
 " set complete=.,w,b,u,t,i
 
@@ -332,17 +333,17 @@ set nojoinspaces
 
 " Welche Zahlenformate (alpha, octal, hex) sollen von Kommandos zum
 " Inkrement (STRG-A) und Dekrement (STRG-X) von Zahlen im Text erkannt werden?
-" Zum Testen Cursor auf Zahl und STRG-A/STRG-X drücken:   15   010    0x11
+" Zum Testen Cursor auf Zahl und STRG-A/STRG-X drÃ¼cken:   15   010    0x11
 set nrformats=alpha,octal,hex
 
 " Anzahl Undo-Schritte (Std: 1000)
 " set undolevels=1000
 
-" Maximale Breite für eingefügten Text (für "gq" + Bewegung, z.B. "gq)")
+" Maximale Breite fÃ¼r eingefÃ¼gten Text (fÃ¼r "gq" + Bewegung, z.B. "gq)")
 " (ACHTUNG: Funkt in Makros oder Funktionen auch rein!)
 " set textwidth=80
 
-" Backspace-Taste soll bei diesen 3 Tasten über den "Rand" hinweg können
+" Backspace-Taste soll bei diesen 3 Tasten Ã¼ber den "Rand" hinweg kÃ¶nnen
 set backspace=indent,eol,start
 
 " Welche Zahlenformate (alpha, octal, hex) sollen von den Kommandos zum
@@ -352,7 +353,7 @@ set nrformats=alpha,octal,hex
 " Nur falls "autocommands" einkompiliert sind
 if has("autocmd")
   " Immer zur letzten bekannten Position beim Editieren einer Datei springen
-  " (nur falls Position gültig und nicht in einem Event-Handler)
+  " (nur falls Position gÃ¼ltig und nicht in einem Event-Handler)
   autocmd BufReadPost *
     \ if line("'\"") > 0 && line("'\"") <= line("$") |
     \   exe "normal g`\"" |
@@ -379,12 +380,12 @@ set esckeys
 "
 " Entbehrlich sind folgende Kommandos (Ersatz vorhanden)
 " C            c$   Ab Cursor bis Zeilenende Text ersetzen
-" D            d$   Ab Cursor bis Zeilenende löschen
+" D            d$   Ab Cursor bis Zeilenende lÃ¶schen
 " Q            --   Permanent in den Ex-Modus umschalten (mit "vi" verlassen)
 " S            cc   Aktuelle Zeile ersetzen
 " s            cl   Aktuelle Zeichen ersetzen (oder c<SPACE>)
-" X            hx   Zeichen VOR Cursor löschen
-" Y            yy   Aktuelle Zeile in temporärem Puffer merken
+" X            hx   Zeichen VOR Cursor lÃ¶schen
+" Y            yy   Aktuelle Zeile in temporÃ¤rem Puffer merken
 " ZZ           :wq  Vim mit Abspeichern verlassen (oder :x)
 " +            k    Eine Zeile nach oben gehen
 " -            j    Eine Zeile nach unten gehen
@@ -406,7 +407,7 @@ nnoremap <F11> :set hls!<bar>set hls?<CR>
 nnoremap <F10> :set number!<CR>:set foldcolumn=0<CR>
 
 " Durch mehrere Dateien springen
-" (+=nächste Datei, -=vorherige, #=aktuelle schreiben und zu nächster springen)
+" (+=nÃ¤chste Datei, -=vorherige, #=aktuelle schreiben und zu nÃ¤chster springen)
 nnoremap + :n<CR>
 nnoremap - :prev<CR>
 "map # :w<CR>:n<CR>
@@ -416,15 +417,15 @@ nnoremap - :prev<CR>
 " map <C-W> /\<
 " map! <C-W> \>/<CR>
 
-" Zeilen länger als 80 Zeichen anzeigen (<CR> = STRG-M)
+" Zeilen lÃ¤nger als 80 Zeichen anzeigen (<CR> = STRG-M)
 " nicht benutzt, F soll Funktion markieren
 " map F /^.\{81\}<CR>
 
-" Ungewöhnliche Zeichen suchen (außerhalb ASCII-Bereich und Umlauten)
-nnoremap X <ESC>/[^ -~äöüÄÖÜß]<CR>
+" UngewÃ¶hnliche Zeichen suchen (auÃŸerhalb ASCII-Bereich und Umlauten)
+nnoremap X <ESC>/[^ -~Ã¤Ã¶Ã¼Ã„Ã–ÃœÃŸ]<CR>
 nnoremap Y <ESC>:nohl<CR>
 
-" Absatzumbruch auf 80 Zeichen Breite (im Vim direkt mit "gq..." möglich)
+" Absatzumbruch auf 80 Zeichen Breite (im Vim direkt mit "gq..." mÃ¶glich)
 nnoremap K !}fmt -80 -u<CR>
 nnoremap K !}fmt -75 -u<CR>
 nnoremap K !}fmt -70 -u<CR>
@@ -442,14 +443,14 @@ nnoremap K !}fmt -70 -u<CR>
 nnoremap Q gq
 
 "-------------------------------------------------------------------------------
-" Eigene Abkürzungen (teilweise deaktiviert)
+" Eigene AbkÃ¼rzungen (teilweise deaktiviert)
 "-------------------------------------------------------------------------------
 
 " Copyright (<CR> = STRG-M)
 "abbr (C) (C) 2007 T.Birnthaler OSTC GmbH<CR>
 "abbr (c) (C) 2007 H.Gottschalk OSTC GmbH<CR>
 
-" Abkürzungen für HTML/PHP (<TAB> = Tabulator, <ESC> = Escape)
+" AbkÃ¼rzungen fÃ¼r HTML/PHP (<TAB> = Tabulator, <ESC> = Escape)
 "abbr HHH <!-- Kommentar --><CR><CR><HTML><CR><TAB><HEAD><CR><TAB><TAB><TITLE>Titel</TITLE><CR><TAB></HEAD><CR><TAB><BODY><CR><?php<CR><TAB>Code<CR>?><CR><TAB></BODY><CR></HTML><CR><ESC>?\(Kommentar\\|Titel\\|Code\)<CR>h
 "abbr SELF <?=$_SERVER[PHP_SELF]?>
 "abbr PHP <?php<CR><TAB>Code<CR>?><CR><ESC>?Code<CR>h
@@ -460,9 +461,9 @@ nnoremap Q gq
 
 "-------------------------------------------------------------------------------
 " Funktionstasten belegen (per Map, der Funktion aufruft)
-" * Funktionsnamen müssen mit einem Grossbuchstaben beginnen!
+" * Funktionsnamen mÃ¼ssen mit einem Grossbuchstaben beginnen!
 " * Vor Funktionsaufrufen "call" verwenden (oder in Ausdruck verwenden)
-" * Zum Einrücken KEINE TABs verwenden!
+" * Zum EinrÃ¼cken KEINE TABs verwenden!
 "-------------------------------------------------------------------------------
 nnoremap <F1>  :call ToggleListMode()<CR>
 " nedded otherwise! map <F2>  :call ToggleWrapMode()<CR>
@@ -581,7 +582,7 @@ let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1 
 nnoremap <Leader>p :MiniBufExplorer<cr>
-" Zum nächsten Fenster wechseln:
+" Zum nÃ¤chsten Fenster wechseln:
 nnoremap <C-j> :MBEbn<CR>
 " " Zum vorherigen Fenster wechseln:
 nnoremap <C-k> :MBEbp<CR>
