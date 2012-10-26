@@ -54,3 +54,11 @@
 	path = bundle/gummybears-colorscheme
 	url = https://github.com/dbb/vim-gummybears-colorscheme.git
 	ignore = dirty
+[submodule "bundle/sudoedit"]
+	path = bundle/sudoedit
+	url = https://github.com/chrisbra/SudoEdit.vim.git
+	ignore = dirty
+[submodule "bundle/syntastic"]
+	path = bundle/syntastic
+	url = https://github.com/scrooloose/syntastic.git
+	ignore = dirty

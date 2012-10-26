@@ -7,6 +7,8 @@
 " ACHTUNG: Bei manchen Vi's keine Leerzeile erlaubt! => " Kommentar nehmen
 "-------------------------------------------------------------------------------
 "
+" make ctrl-q and ctrl-s work in vim
+silent !stty -ixon > /dev/null 2>/dev/null
 "
 " PATHOGEN 
 call pathogen#infect()
@@ -19,6 +21,7 @@ let mapleader = ","
 " open Nertree on startup if no argument - sucks in large homedir
 " autocmd vimenter * if !argc() | NERDTree | endif
 nnoremap <silent> <F4>  :NERDTreeToggle<CR>
+"
 "-------------------------------------------------------------------------------
 " Vi-Kompatibilität
 "-------------------------------------------------------------------------------
@@ -491,13 +494,6 @@ function ToggleWrapMode()
   let &wrap = ! &wrap
 endfunction
 
-" Svens maps n stuff
-nnoremap sD :r!date<cr>0i# Datum<tab><tab><esc>0
-nnoremap sA o# Autor<tab><tab>Sven Hergenhahn<esc>0
-nnoremap sF o# Datei<tab><tab><c-r>%<esc>0
-nnoremap sC o<esc>79i#<esc>0
-nnoremap sS sCsFsAsDsCo<cr>
-
 "# markiere Funktion (visual)
 "map F 0mqf{%v'q
 
@@ -576,20 +572,9 @@ noremap <silent> <F12> :cal VimCommanderToggle()<CR>
 
 filetype plugin indent on
 
-" MiniBufExplorer
-let g:miniBufExplMapWindowNavVim = 1
-let g:miniBufExplMapWindowNavArrows = 1
-let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplModSelTarget = 1 
-nnoremap <Leader>p :MiniBufExplorer<cr>
-" Zum nächsten Fenster wechseln:
-nnoremap <C-j> :MBEbn<CR>
-" " Zum vorherigen Fenster wechseln:
-nnoremap <C-k> :MBEbp<CR>
 
 " TaskList & TagList
-nnoremap T :TaskList<CR>
-nnoremap _t :TlistToggle<CR>
+nnoremap <leader>T :TlistToggle<CR>
 
 " no swap file (tilde files)
 " set uc=0
