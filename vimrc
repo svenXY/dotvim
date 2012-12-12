@@ -580,3 +580,5 @@ nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 " fixing the & command
 nnoremap & :&&<CR>
 xnoremap & :&&<CR>
+
+cnoremap help vertical help 
