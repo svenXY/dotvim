@@ -66,3 +66,7 @@
 	path = bundle/surround
 	url = https://github.com/tpope/vim-surround.git
 	ignore = dirty
+[submodule "bundle/visual-star-search"]
+	path = bundle/visual-star-search
+	url = https://github.com/bronson/vim-visual-star-search
+	ignore = dirty
