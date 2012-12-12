@@ -1,10 +1,6 @@
-"
 "-------------------------------------------------------------------------------
 " "~/.vimrc" Konfigurations-Datei fuer den Vim
 "-------------------------------------------------------------------------------
-" Kommentar wird durch " eingeleitet (nur am Zeilenanfang erlaubt!)
-"-------------------------------------------------------------------------------
-"
 " make ctrl-q and ctrl-s work in vim
 silent !stty -ixon > /dev/null 2>/dev/null
 "
@@ -15,15 +11,11 @@ call pathogen#helptags()
 
 " set the leader
 let mapleader = ","
+nnoremap \ ,
 
-" open Nertree on startup if no argument - sucks in large homedir
-" autocmd vimenter * if !argc() | NERDTree | endif
 nnoremap <silent> <F4>  :NERDTreeToggle<CR>
-"
-"-------------------------------------------------------------------------------
-" Vi-Kompatibilität
-"-------------------------------------------------------------------------------
 set nocompatible
+
 "-------------------------------------------------------------------------------
 " Bildschirm-Darstellung
 "-------------------------------------------------------------------------------
@@ -38,10 +30,6 @@ set showcmd
 
 " Koordinatenanzeige in Statuszeile aktivieren
 set ruler
-
-" Format von Statuszeile und Koordinatenanzeige definieren (hier Std-Werte)
-" set statusline=...
-" set rulerformat=...
 
 " Datei-Titel in xterm-Titelzeile anzeigen (nicht in allen Terminals mögl.)
 set title
@@ -152,14 +140,6 @@ colorscheme peachpuff
 " (das Syntax-Highlighting wird daran angepasst)
 set background=light
 "set background=dark
-
-" Dateityp festlegen (für Syntax-Highlighting, Autokommandos, ...)
-" (normalerweise durch "Extension" oder "Shee-Bang-Zeile" festgelegt)
-" Dateityp-Erkennung (Einrücken, Plugins auch)
-set filetype on
-set filetype indent on
-set filetype plugin on
-"set omnifunc=...
 
 "-------------------------------------------------------------------------------
 " Farben für Syntax-Highlighting selber definieren
@@ -569,6 +549,10 @@ nnoremap <down> <nop>
 nnoremap <left> <nop>
 nnoremap <right> <nop>
 
+" avoid cursor keys for command history
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+
 nnoremap <leader>#l :execute "rightbelow vsplit " . bufname("#")<cr>
 nnoremap <leader>#h :execute "leftabove vsplit " . bufname("#")<cr>
 nnoremap <leader>#j :execute "rightbelow split " . bufname("#")<cr>
@@ -586,3 +570,13 @@ set laststatus=2
 :set statusline+=%l        " Current line
 :set statusline+=/         " Separator
 :set statusline+=%L        " Total lines
+
+" put active file directory into %%
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
+
+" mute highlighting
+nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
+
+" fixing the & command
+nnoremap & :&&<CR>
+xnoremap & :&&<CR>
