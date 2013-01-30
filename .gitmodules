@@ -22,10 +22,6 @@
 	path = bundle/buftabs
 	url = https://github.com/vim-scripts/buftabs.git
 	ignore = dirty
-[submodule "bundle/pydoc"]
-	path = bundle/pydoc
-	url = https://github.com/parantapa/pydoc.vim.git
-	ignore = dirty
 [submodule "bundle/taglist"]
 	path = bundle/taglist
 	url = https://github.com/vim-scripts/taglist.vim.git
