@@ -1,5 +1,6 @@
 # Can ignore specific files
 .netrwhist
+.svn
 
 # Use wildcards as well
 *~
