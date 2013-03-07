@@ -583,4 +583,3 @@ xnoremap & :&&<CR>
 
 cnoremap help vertical help 
 
-" test line
