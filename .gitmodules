@@ -36,7 +36,8 @@
 	ignore = dirty
 [submodule "bundle/vcscommand"]
 	path = bundle/vcscommand
-	url = https://github.com/vim-scripts/vcscommand.vim.git
+    #url = https://github.com/vim-scripts/vcscommand.vim.git
+    url = http://repo.or.cz/r/vcscommand.git
 	ignore = dirty
 [submodule "bundle/unimpaired"]
 	path = bundle/unimpaired
@@ -69,4 +70,8 @@
 [submodule "bundle/pydoc"]
 	path = bundle/pydoc
 	url = http://github.com/svenXY/pydoc.vim
+	ignore = dirty
+[submodule "bundle/repeat"]
+	path = bundle/repeat
+	url = https://github.com/tpope/vim-repeat.git
 	ignore = dirty
