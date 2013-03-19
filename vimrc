@@ -35,15 +35,12 @@ set ruler
 set title
 
 " Zeilen NICHT nummeriert darstellen
-set nonumber
+set number
 
 " Tabulator und Zeilenende NICHT anzeigen (siehe lcs = listchars)
 set nolist
 
-" Bei Fehlern (z.B. 2x ESC) nicht piepsen, sondern visuelle Anzeige
-set noerrorbells
-set visualbell
-
+set splitright splitbelow
 "-------------------------------------------------------------------------------
 " Zeilenumbruch
 "-------------------------------------------------------------------------------
@@ -133,7 +130,7 @@ syntax on
 " (16 Stück: blue, darkblue, default, desert, elflord, evening, koehler,
 "            morning, murphy, pablo, peachpuff, ron, shine, torte, zellner)
 " TIPP: Auflisten mit: :colo TAB...
-colorscheme peachpuff
+colorscheme gummybears
 "colorscheme default
 
 " Hintergrund-Helligkeit definieren ("dark" oder "light"),
@@ -581,5 +578,13 @@ nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 nnoremap & :&&<CR>
 xnoremap & :&&<CR>
 
+" mappings to open a file in the directory of the file in the current buffer
+cnoremap %% <C-R>=expand('%:h').'/'<cr>
+map <leader>ew :e %%
+map <leader>es :sp %%
+map <leader>ev :vsp %%
+map <leader>et :tabe %%
 cnoremap help vertical help 
 
+" Resize Vsplits on window resize 
+au VimResized * exe "normal! \<c-w>="
