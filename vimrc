@@ -588,3 +588,6 @@ cnoremap help vertical help
 
 " Resize Vsplits on window resize 
 au VimResized * exe "normal! \<c-w>="
+
+" configure a directory for vim-notes
+let g:notes_directory = '~/Ubuntu One/notes'
