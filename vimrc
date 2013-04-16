@@ -130,13 +130,13 @@ syntax on
 " (16 Stück: blue, darkblue, default, desert, elflord, evening, koehler,
 "            morning, murphy, pablo, peachpuff, ron, shine, torte, zellner)
 " TIPP: Auflisten mit: :colo TAB...
-colorscheme gummybears
+colorscheme solarized
 "colorscheme default
 
 " Hintergrund-Helligkeit definieren ("dark" oder "light"),
 " (das Syntax-Highlighting wird daran angepasst)
-set background=light
-"set background=dark
+"set background=light
+set background=dark
 
 "-------------------------------------------------------------------------------
 " Farben für Syntax-Highlighting selber definieren

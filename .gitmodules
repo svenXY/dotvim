@@ -79,3 +79,7 @@
 	path = bundle/colors-solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
 	ignore = dirty
+[submodule "bundle/notes"]
+	path = bundle/notes
+	url = https://github.com/xolox/vim-notes.git
+	ignore = dirty
