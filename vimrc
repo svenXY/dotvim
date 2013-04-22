@@ -139,55 +139,6 @@ colorscheme solarized
 set background=dark
 
 "-------------------------------------------------------------------------------
-" Farben für Syntax-Highlighting selber definieren
-"-------------------------------------------------------------------------------
-
-" Statement-Elemente dunkelblau statt gelb (sonst schwer lesbar!)
-hi statement ctermfg=darkblue guifg=black
-
-" Variablen schwarz statt gelb (sonst schwer lesbar!)
-hi identifier ctermfg=black guifg=black
-
-" Mögliche Farben:
-" Black, DarkBlue, DarkGreen, DarkCyan, DarkRed, DarkMagenta, Brown, DarkYellow,
-" LightGray, LightGrey, Gray, Grey, DarkGray, DarkGrey, Blue, LightBlue
-" Green, LightGreen, Cyan, LightCyan, Red, LightRed, Magenta, LightMagenta
-" Yellow, LightYellow, White
-"
-" Mögliche Syntax-Gruppen:
-" Comment, Constant, Identifier, Statement, PreProc, Type, Special, Underlined
-" Ignore, Error, Todo
-"
-" Dunkler Hintergrund:
-" SynColor Comment    term=bold cterm=NONE ctermfg=Cyan ctermbg=NONE gui=NONE guifg=#80a0ff guibg=NONE
-" SynColor Constant   term=underline cterm=NONE ctermfg=Magenta ctermbg=NONE gui=NONE guifg=#ffa0a0 gu
-" SynColor Special    term=bold cterm=NONE ctermfg=LightRed ctermbg=NONE gui=NONE guifg=Orange guibg=N
-" SynColor Identifier term=underline cterm=bold ctermfg=Cyan ctermbg=NONE gui=NONE guifg=#40ffff g
-" SynColor Statement  term=bold cterm=NONE ctermfg=Yellow ctermbg=NONE gui=bold guifg=#ffff60 guib
-" SynColor PreProc    term=underline cterm=NONE ctermfg=LightBlue ctermbg=NONE gui=NONE guifg=#ff80ff
-" SynColor Type       term=underline cterm=NONE ctermfg=LightGreen ctermbg=NONE gui=bold guifg=#60ff60
-" hi       type       term=underline cterm=NONE ctermfg=Green ctermbg=NONE gui=bold guifg=#60ff60
-" hi       identifier term=underline cterm=NONE ctermfg=Yellow ctermbg=NONE gui=bold guifg=#60ff60
-" SynColor Underlined term=underline cterm=underline ctermfg=LightBlue gui=underline guifg=#80a0ff
-" SynColor Ignore     term=NONE cterm=NONE ctermfg=black ctermbg=NONE gui=NONE guifg=bg guibg=NONE
-" SynColor Error      term=reverse cterm=NONE ctermfg=White ctermbg=Red gui=NONE guifg=White guibg=Red
-" SynColor Todo       term=standout cterm=NONE ctermfg=Black ctermbg=Yellow gui=NONE guifg=Blue guibg=
-"
-" Heller Hintergrund:
-" SynColor Comment    term=bold cterm=NONE ctermfg=DarkBlue ctermbg=NONE gui=NONE guifg=Blue guibg=NON
-" SynColor Constant   term=underline cterm=NONE ctermfg=DarkRed ctermbg=NONE gui=NONE guifg=Magenta gu
-" SynColor Special    term=bold cterm=NONE ctermfg=DarkMagenta ctermbg=NONE gui=NONE guifg=SlateBlue g
-" SynColor Identifier term=underline cterm=NONE ctermfg=DarkCyan ctermbg=NONE gui=NONE guifg=DarkC
-" SynColor Statement  term=bold cterm=NONE ctermfg=Brown ctermbg=NONE gui=bold guifg=Brown guibg=N
-" SynColor PreProc    term=underline cterm=NONE ctermfg=DarkMagenta ctermbg=NONE gui=NONE guifg=Purple
-" SynColor Type       term=underline cterm=NONE ctermfg=DarkGreen ctermbg=NONE gui=bold guifg=SeaGreen
-" hi       type       term=underline cterm=NONE ctermfg=LightGreen ctermbg=NONE gui=bold guifg=SeaGreen
-" SynColor Underlined term=underline cterm=underline ctermfg=DarkMagenta gui=underline guifg=Slate
-" SynColor Ignore     term=NONE cterm=NONE ctermfg=white ctermbg=NONE gui=NONE guifg=bg guibg=NONE
-" SynColor Error      term=reverse cterm=NONE ctermfg=White ctermbg=Red gui=NONE guifg=White guibg=Red
-" SynColor Todo       term=standout cterm=NONE ctermfg=Black ctermbg=Yellow gui=NONE guifg=Blue guibg=
-
-"-------------------------------------------------------------------------------
 " Faltung ("zusammenklappen" von Programmteilen) steuern
 "-------------------------------------------------------------------------------
 
@@ -389,6 +340,8 @@ autocmd FileType perl source ~/.vim/svh_perl
 
 " set up syntax highlighting for my e-mail
 au BufRead,BufNewFile .followup,.article,.letter,/tmp/pico*,nn.*,snd.*,/tmp/mutt* :set ft=mail 
+" solarized-light for writung mails
+autocmd FileType mail set background=light
 
 set fileformat=unix
 
