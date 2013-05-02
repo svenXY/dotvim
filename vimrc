@@ -136,7 +136,7 @@ colorscheme solarized
 " Hintergrund-Helligkeit definieren ("dark" oder "light"),
 " (das Syntax-Highlighting wird daran angepasst)
 "set background=light
-set background=dark
+set background=light
 
 "-------------------------------------------------------------------------------
 " Faltung ("zusammenklappen" von Programmteilen) steuern
@@ -341,7 +341,7 @@ autocmd FileType perl source ~/.vim/svh_perl
 " set up syntax highlighting for my e-mail
 au BufRead,BufNewFile .followup,.article,.letter,/tmp/pico*,nn.*,snd.*,/tmp/mutt* :set ft=mail 
 " solarized-light for writung mails
-autocmd FileType mail set background=light
+autocmd FileType mail set background=light spell spelllang=de_de
 
 set fileformat=unix
 
