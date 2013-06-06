@@ -512,7 +512,7 @@ xnoremap & :&&<CR>
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 map <leader>ew :e %%
 map <leader>es :sp %%
-map <leader>ev :vsp %%
+map <leader>eV :vsp %%
 map <leader>et :tabe %%
 cnoremap help vertical help 
 
