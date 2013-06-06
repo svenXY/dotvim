@@ -379,7 +379,6 @@ nnoremap  :w!<CR>:!aspell check %<CR>:e! %<CR>
 
 filetype plugin indent on
 
-
 " TaskList & TagList
 nnoremap <leader>T :TlistToggle<CR>
 
@@ -392,12 +391,12 @@ autocmd BufRead /tmp/mutt*[0-9] normal :g/^> --\s\=$/,/^$/-1d
 au FileType python set omnifunc=pythoncomplete#Complete
 autocmd BufNewFile,BufRead *.py compiler python
 
-if (v:version >= 700) 
-	highlight SpellBad      ctermfg=Red         term=Reverse        guisp=Red       gui=undercurl   ctermbg=White 
-	highlight SpellCap      ctermfg=Green       term=Reverse        guisp=Green     gui=undercurl   ctermbg=White 
-	highlight SpellLocal    ctermfg=Cyan        term=Underline      guisp=Cyan      gui=undercurl   ctermbg=White 
-	highlight SpellRare     ctermfg=Magenta     term=underline      guisp=Magenta   gui=undercurl   ctermbg=White 
-endif " version 7+ 
+"if (v:version >= 700) 
+"	highlight SpellBad      ctermfg=Red         term=Reverse        guisp=Red       gui=undercurl   ctermbg=White 
+"	highlight SpellCap      ctermfg=Green       term=Reverse        guisp=Green     gui=undercurl   ctermbg=White 
+"	highlight SpellLocal    ctermfg=Cyan        term=Underline      guisp=Cyan      gui=undercurl   ctermbg=White 
+"	highlight SpellRare     ctermfg=Magenta     term=underline      guisp=Magenta   gui=undercurl   ctermbg=White 
+"endif " version 7+ 
 
 fu! DoRunPyBuffer2()
 	pclose! " force preview window closed
@@ -447,28 +446,6 @@ autocmd BufReadPost *
   \ if line("'\"") > 0 && line("'\"") <= line("$") |
   \   exe "normal g`\"" |
   \ endif
-
-" Do make with different makeprg settings.
-" Error lists from each makeprg are combined into one quickfix list.
-command! Pycheck call DoMake('pyflakes', 'pep8')
-function! DoMake(...)
-  update  " save any changes because makeprg checks the file on disk
-  let savemp = &makeprg
-  let qflist = []
-  for prg in a:000
-    let &makeprg = prg . ' %'
-    silent make!
-    let qflist += getqflist()
-  endfor
-  if empty(qflist)
-    cclose
-  else
-    call setqflist(qflist)
-    copen
-    cfirst
-  endif
-  let &makeprg = savemp
-endfunction
 
 " SuperTab settings
 let g:SuperTabLongestEnhanced=1
@@ -544,3 +521,11 @@ au VimResized * exe "normal! \<c-w>="
 
 " configure a directory for vim-notes
 let g:notes_directory = '~/Ubuntu One/notes'
+
+" prevent pyflakes from polluting quickfix
+let g:pyflakes_use_quickfix = 0
+
+" Syntastic
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_loc_list_height=3
+let g:syntastic_check_on_open=1
