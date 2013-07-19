@@ -83,3 +83,7 @@
 	path = bundle/notes
 	url = https://github.com/xolox/vim-notes.git
 	ignore = dirty
+[submodule "bundle/jinja2-syntax"]
+	path = bundle/jinja2-syntax
+	url = https://github.com/Glench/Vim-Jinja2-Syntax.git
+	ignore = dirty
