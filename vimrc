@@ -386,7 +386,10 @@ let VCSCommandResultBufferNameExtension = ".vcs"
 let VCSCommandDeleteOnHide = 1
 
 " mutt stuff
-autocmd BufRead /tmp/mutt*[0-9] normal :g/^> --\s\=$/,/^$/-1d
+function! PrepareMail()
+    silent g/^> --\s\=$/,/^$/-1d
+endfu
+autocmd BufRead /tmp/mutt*[0-9] call PrepareMail()
 
 au FileType python set omnifunc=pythoncomplete#Complete
 autocmd BufNewFile,BufRead *.py compiler python
