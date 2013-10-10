@@ -1,20 +1,58 @@
 "-------------------------------------------------------------------------------
 " "~/.vimrc" Konfigurations-Datei fuer den Vim
 "-------------------------------------------------------------------------------
+set nocompatible
+filetype off
+
 " make ctrl-q and ctrl-s work in vim
 silent !stty -ixon > /dev/null 2>/dev/null
 "
+" remove pathogen and use vundle
 " PATHOGEN 
-call pathogen#infect()
-"call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
+"call pathogen#infect()
+""call pathogen#runtime_append_all_bundles()
+"call pathogen#helptags()
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" github plugins
+Bundle 'gmarik/vundle'
+Bundle 'kevinw/pyflakes-vim'
+Bundle 'msanders/snipmate.vim'
+Bundle 'vim-scripts/vimcommander'
+Bundle 'vim-scripts/Bexec'
+Bundle 'ervandew/supertab'
+Bundle 'vim-scripts/buftabs'
+Bundle 'vim-scripts/taglist.vim'
+Bundle 'neilhwatson/vim_cf3'
+Bundle 'scrooloose/nerdtree'
+Bundle 'vim-scripts/vcscommand.vim'
+Bundle 'tpope/vim-unimpaired'
+Bundle 'mileszs/ack.vim'
+Bundle 'dbb/vim-gummybears-colorscheme'
+Bundle 'chrisbra/SudoEdit.vim'
+Bundle 'scrooloose/syntastic'
+Bundle 'tpope/vim-surround'
+Bundle 'bronson/vim-visual-star-search'
+Bundle 'svenXY/pydoc.vim'
+Bundle 'tpope/vim-repeat'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'xolox/vim-notes'
+Bundle 'Glench/Vim-Jinja2-Syntax'
+Bundle 'xolox/vim-misc'
+
+" Non-github plugins
+Bundle 'http://repo.or.cz/r/vcscommand.git'
+
+filetype plugin indent on
+
 
 " set the leader
 let mapleader = ","
 nnoremap \ ,
 
 nnoremap <silent> <F4>  :NERDTreeToggle<CR>
-set nocompatible
 
 "-------------------------------------------------------------------------------
 " Bildschirm-Darstellung
@@ -523,7 +561,7 @@ cnoremap help vertical help
 au VimResized * exe "normal! \<c-w>="
 
 " configure a directory for vim-notes
-let g:notes_directory = '~/Ubuntu One/notes'
+let g:notes_directories = ['~/Ubuntu One/notes']
 
 " prevent pyflakes from polluting quickfix
 let g:pyflakes_use_quickfix = 0
