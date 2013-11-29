@@ -41,6 +41,7 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'xolox/vim-notes'
 Bundle 'Glench/Vim-Jinja2-Syntax'
 Bundle 'xolox/vim-misc'
+Bundle 'godlygeek/tabular'
 
 " Non-github plugins
 Bundle 'http://repo.or.cz/r/vcscommand.git'
@@ -562,6 +563,7 @@ au VimResized * exe "normal! \<c-w>="
 
 " configure a directory for vim-notes
 let g:notes_directories = ['~/Ubuntu One/notes']
+let g:notes_smart_quotes = 0
 
 " prevent pyflakes from polluting quickfix
 let g:pyflakes_use_quickfix = 0
@@ -570,3 +572,6 @@ let g:pyflakes_use_quickfix = 0
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_loc_list_height=3
 let g:syntastic_check_on_open=1
+
+" map ,bg to toggle background
+map <Leader>bg :let &background = ( &background == "dark"? "light" : "dark" )<CR>
