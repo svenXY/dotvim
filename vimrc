@@ -7,12 +7,7 @@ filetype off
 " make ctrl-q and ctrl-s work in vim
 silent !stty -ixon > /dev/null 2>/dev/null
 "
-" remove pathogen and use vundle
-" PATHOGEN 
-"call pathogen#infect()
-""call pathogen#runtime_append_all_bundles()
-"call pathogen#helptags()
-
+" use vundle
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
@@ -575,3 +570,9 @@ let g:syntastic_check_on_open=1
 
 " map ,bg to toggle background
 map <Leader>bg :let &background = ( &background == "dark"? "light" : "dark" )<CR>
+
+" source host .vimrc
+let s:host_vimrc = $HOME . '/.vim/vimrc.' . hostname()
+if filereadable(s:host_vimrc)
+  execute 'source ' . s:host_vimrc
+endif

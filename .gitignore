@@ -1,8 +1,10 @@
 # Can ignore specific files
 .netrwhist
 .svn
+vimrc.*
 
 # Use wildcards as well
+*.pyc
 *~
 *.swp
 .*.swp
