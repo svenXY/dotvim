@@ -29,6 +29,7 @@ Bundle 'dbb/vim-gummybears-colorscheme'
 Bundle 'chrisbra/SudoEdit.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-fugitive'
 Bundle 'bronson/vim-visual-star-search'
 Bundle 'svenXY/pydoc.vim'
 Bundle 'tpope/vim-repeat'
@@ -37,6 +38,7 @@ Bundle 'xolox/vim-notes'
 Bundle 'Glench/Vim-Jinja2-Syntax'
 Bundle 'xolox/vim-misc'
 Bundle 'godlygeek/tabular'
+Bundle 'rodjek/vim-puppet'
 
 " Non-github plugins
 Bundle 'http://repo.or.cz/r/vcscommand.git'
@@ -488,12 +490,6 @@ autocmd BufReadPost *
 let g:SuperTabLongestEnhanced=1
 let g:SuperTabLongestHighlight=1
 
-" svndiff stuff http://www.vim.org/scripts/script.php?script_id=1881
-hi DiffAdd      ctermfg=0 ctermbg=2 guibg='green'
-hi DiffDelete   ctermfg=0 ctermbg=1 guibg='red'
-hi DiffChange   ctermfg=0 ctermbg=3 guibg='yellow'
-
-
 " Bubble single lines
 nmap <C-Up> [e
 nmap <C-Down> ]e
@@ -530,10 +526,11 @@ nnoremap <leader># :nohl<cr>
 set laststatus=2
 :let g:buftabs_in_statusline=1
 
-:set statusline+=%=        " Switch to the right side
-:set statusline+=%l        " Current line
-:set statusline+=/         " Separator
-:set statusline+=%L        " Total lines
+set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+":set statusline+=%=        " Switch to the right side
+":set statusline+=%l        " Current line
+":set statusline+=/         " Separator
+":set statusline+=%L        " Total lines
 
 " put active file directory into %%
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
