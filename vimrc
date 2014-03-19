@@ -39,12 +39,14 @@ Bundle 'Glench/Vim-Jinja2-Syntax'
 Bundle 'xolox/vim-misc'
 Bundle 'godlygeek/tabular'
 Bundle 'rodjek/vim-puppet'
+Bundle 'caio/querycommandcomplete.vim'
+Bundle 'svenXY/vim-muttmail'
+Bundle 'honza/vim-snippets'
 
 " Non-github plugins
 Bundle 'http://repo.or.cz/r/vcscommand.git'
 
 filetype plugin indent on
-
 
 " set the leader
 let mapleader = ","
@@ -153,6 +155,11 @@ set nopreserveindent
 " Automatisch Einrückung für C-Programme NICHT aktivieren
 set nocindent
 
+" Hintergrund-Helligkeit definieren ("dark" oder "light"),
+" (das Syntax-Highlighting wird daran angepasst)
+"set background=light
+set background=light
+
 "-------------------------------------------------------------------------------
 " Syntax-Highlighting
 "-------------------------------------------------------------------------------
@@ -166,13 +173,10 @@ syntax on
 " (16 Stück: blue, darkblue, default, desert, elflord, evening, koehler,
 "            morning, murphy, pablo, peachpuff, ron, shine, torte, zellner)
 " TIPP: Auflisten mit: :colo TAB...
+set t_Co=16
+let g:solarized_termcolors=16
 colorscheme solarized
 "colorscheme default
-
-" Hintergrund-Helligkeit definieren ("dark" oder "light"),
-" (das Syntax-Highlighting wird daran angepasst)
-"set background=light
-set background=light
 
 "-------------------------------------------------------------------------------
 " Faltung ("zusammenklappen" von Programmteilen) steuern
@@ -361,7 +365,7 @@ function CommentPerl()
 endfunction
 
 " Bufferliste
-nnoremap   <F5> :ls<CR>:e #
+nnoremap   <F5> :ls<CR>:b 
 
 " Alle Register anzeigen, nach Auswahl einfuegen
 fu! RegList()
@@ -372,12 +376,6 @@ endfunction
 
 nnoremap <F6> :call RegList()<cr>
 
-autocmd FileType perl source ~/.vim/svh_perl
-
-" set up syntax highlighting for my e-mail
-au BufRead,BufNewFile .followup,.article,.letter,/tmp/pico*,nn.*,snd.*,/tmp/mutt* :set ft=mail 
-" solarized-light for writung mails
-autocmd FileType mail set background=light spell spelllang=de_de
 
 set fileformat=unix
 
@@ -407,9 +405,6 @@ vnoremap <s-tab> <gv
 nnoremap <silent> _t :%!perltidy -q<Enter>
 vnoremap <silent> _t :!perltidy -q<Enter>
 
-" visually select to matching delimiter
-noremap % v% 
-
 " aspell
 nnoremap  :w!<CR>:!aspell check %<CR>:e! %<CR>
 
@@ -420,12 +415,6 @@ nnoremap <leader>T :TlistToggle<CR>
 
 let VCSCommandResultBufferNameExtension = ".vcs"
 let VCSCommandDeleteOnHide = 1
-
-" mutt stuff
-function! PrepareMail()
-    silent g/^> --\s\=$/,/^$/-1d
-endfu
-autocmd BufRead /tmp/mutt*[0-9] call PrepareMail()
 
 au FileType python set omnifunc=pythoncomplete#Complete
 autocmd BufNewFile,BufRead *.py compiler python
@@ -565,11 +554,29 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_loc_list_height=3
 let g:syntastic_check_on_open=1
 
+" puppet-lint is incredibly strict!
+let g:loaded_syntastic_puppet_puppetlint_checker=1
+"let g:syntastic_puppet_puppetlint_args='--no-autoloader_layout-check'
+
 " map ,bg to toggle background
 map <Leader>bg :let &background = ( &background == "dark"? "light" : "dark" )<CR>
+
+" Mutt stuff
+let g:MuttSigStripString='Hauptsitz'
+
+let g:snips_author='Sven Hergenhahn'
+let g:snips_email='sven.hergenhahn@1und1.de'
+
+" fugitive stuff
+" fugitive needs an english speaking git
+let g:fugitive_git_executable = 'LANG=en_US.UTF-8 git'
+
+autocmd FileType perl source ~/.vim/svh_perl
 
 " source host .vimrc
 let s:host_vimrc = $HOME . '/.vim/vimrc.' . hostname()
 if filereadable(s:host_vimrc)
   execute 'source ' . s:host_vimrc
 endif
+
+
