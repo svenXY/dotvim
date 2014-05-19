@@ -42,6 +42,7 @@ Bundle 'rodjek/vim-puppet'
 Bundle 'caio/querycommandcomplete.vim'
 Bundle 'svenXY/vim-muttmail'
 Bundle 'honza/vim-snippets'
+Bundle 'kien/ctrlp.vim'
 
 " Non-github plugins
 Bundle 'http://repo.or.cz/r/vcscommand.git'
@@ -152,14 +153,6 @@ set smartindent
 set nocopyindent
 set nopreserveindent
 
-" Automatisch Einrückung für C-Programme NICHT aktivieren
-set nocindent
-
-" Hintergrund-Helligkeit definieren ("dark" oder "light"),
-" (das Syntax-Highlighting wird daran angepasst)
-"set background=light
-set background=light
-
 "-------------------------------------------------------------------------------
 " Syntax-Highlighting
 "-------------------------------------------------------------------------------
@@ -174,6 +167,7 @@ syntax on
 "            morning, murphy, pablo, peachpuff, ron, shine, torte, zellner)
 " TIPP: Auflisten mit: :colo TAB...
 set t_Co=16
+set background=dark
 let g:solarized_termcolors=16
 colorscheme solarized
 "colorscheme default
@@ -543,7 +537,7 @@ cnoremap help vertical help
 au VimResized * exe "normal! \<c-w>="
 
 " configure a directory for vim-notes
-let g:notes_directories = ['~/Ubuntu One/notes']
+let g:notes_directories = ['~/ownCloud/notes']
 let g:notes_smart_quotes = 0
 
 " prevent pyflakes from polluting quickfix
@@ -570,6 +564,9 @@ let g:snips_email='sven.hergenhahn@1und1.de'
 " fugitive stuff
 " fugitive needs an english speaking git
 let g:fugitive_git_executable = 'LANG=en_US.UTF-8 git'
+
+"Ctrl-P stuff
+"let g:ctrlp_cmd = 'CtrlPBuffer'
 
 autocmd FileType perl source ~/.vim/svh_perl
 
