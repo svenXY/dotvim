@@ -6,43 +6,45 @@ filetype off
 
 " make ctrl-q and ctrl-s work in vim
 silent !stty -ixon > /dev/null 2>/dev/null
-"
+
 " use vundle
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " github plugins
+"Bundle 'ervandew/supertab'
+Bundle 'Glench/Vim-Jinja2-Syntax'
+Bundle 'SirVer/ultisnips'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'bronson/vim-visual-star-search'
+Bundle 'caio/querycommandcomplete.vim'
+Bundle 'chrisbra/SudoEdit.vim'
+Bundle 'dbb/vim-gummybears-colorscheme'
 Bundle 'gmarik/vundle'
+Bundle 'godlygeek/tabular'
+Bundle 'honza/vim-snippets'
 Bundle 'kevinw/pyflakes-vim'
-Bundle 'msanders/snipmate.vim'
-Bundle 'vim-scripts/vimcommander'
+Bundle 'kien/ctrlp.vim'
+Bundle 'mileszs/ack.vim'
+"Bundle 'msanders/snipmate.vim'
+Bundle 'neilhwatson/vim_cf3'
+Bundle 'rodjek/vim-puppet'
+Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/syntastic'
+Bundle 'svenXY/pydoc.vim'
+Bundle 'svenXY/vim-muttmail'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-unimpaired'
 Bundle 'vim-scripts/Bexec'
-Bundle 'ervandew/supertab'
 Bundle 'vim-scripts/buftabs'
 Bundle 'vim-scripts/taglist.vim'
-Bundle 'neilhwatson/vim_cf3'
-Bundle 'scrooloose/nerdtree'
 Bundle 'vim-scripts/vcscommand.vim'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'mileszs/ack.vim'
-Bundle 'dbb/vim-gummybears-colorscheme'
-Bundle 'chrisbra/SudoEdit.vim'
-Bundle 'scrooloose/syntastic'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-fugitive'
-Bundle 'bronson/vim-visual-star-search'
-Bundle 'svenXY/pydoc.vim'
-Bundle 'tpope/vim-repeat'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'xolox/vim-notes'
-Bundle 'Glench/Vim-Jinja2-Syntax'
+Bundle 'vim-scripts/vimcommander'
 Bundle 'xolox/vim-misc'
-Bundle 'godlygeek/tabular'
-Bundle 'rodjek/vim-puppet'
-Bundle 'caio/querycommandcomplete.vim'
-Bundle 'svenXY/vim-muttmail'
-Bundle 'honza/vim-snippets'
-Bundle 'kien/ctrlp.vim'
+Bundle 'xolox/vim-notes'
 
 " Non-github plugins
 Bundle 'http://repo.or.cz/r/vcscommand.git'
@@ -577,3 +579,9 @@ if filereadable(s:host_vimrc)
 endif
 
 
+let g:UltiSnipsListSnippets='<m-k>'
+let g:UltiSnipsExpandTrigger='<c-k>'
+let g:UltiSnipsJumpForwardTrigger='<c-k>'
+let g:UltiSnipsJumpBackwardTrigger='<c-s-j>'
+
+let g:load_templates="no"
