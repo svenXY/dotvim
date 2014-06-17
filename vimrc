@@ -11,6 +11,7 @@ silent !stty -ixon > /dev/null 2>/dev/null
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
+" Vundle {1 "
 " github plugins
 "Bundle 'ervandew/supertab'
 Bundle 'Glench/Vim-Jinja2-Syntax'
@@ -45,9 +46,11 @@ Bundle 'vim-scripts/vcscommand.vim'
 Bundle 'vim-scripts/vimcommander'
 Bundle 'xolox/vim-misc'
 Bundle 'xolox/vim-notes'
+Bundle 'xolox/vim-shell'
 
 " Non-github plugins
 Bundle 'http://repo.or.cz/r/vcscommand.git'
+" 1} "
 
 filetype plugin indent on
 
@@ -75,8 +78,9 @@ set ruler
 " Datei-Titel in xterm-Titelzeile anzeigen (nicht in allen Terminals mögl.)
 set title
 
-" Zeilen NICHT nummeriert darstellen
+" Zeilen nummeriert darstellen (und mit relative)
 set number
+set relativenumber
 
 " Tabulator und Zeilenende NICHT anzeigen (siehe lcs = listchars)
 set nolist
@@ -144,7 +148,7 @@ set shiftwidth=4
 " Eingegebene Tabulatoren zu Leerzeichen expandieren
 set expandtab
 
-" Zeige zugeh. öffnende Klammer "([{<" bei Eingabe der korresp. Schließenden
+" Zeige zugeh. öffnende Klammer bei Eingabe der korresp. Schließenden
 set showmatch
 
 " Klammern, die "%" berücksichtigt (Sprung auf korrespondierende Klammer)
@@ -188,16 +192,7 @@ set foldcolumn=0
 " Faltungsmethode ("manual", "indent", "expr", "marker", "syntax", "diff")
 " (Std: manual, "expr" -> foldexpr-Option, "marker" -> foldmarker-Option)
 set foldmethod=syntax
-
-set foldmethod=expr
-set foldexpr=0
-
-set foldmethod=marker
 set foldmarker={,}
-
-set foldmethod=indent
-
-set foldmethod=manual
 
 " Schnelles Folding aktivieren
 " (beim Betreten mit Cursor auf, beim Verlassen zu, sehr unruhig)
@@ -288,9 +283,15 @@ endif
 " Required to be able to use keypad keys and map missed escape sequences
 set esckeys
 
+
+" wild* settings { "
 " Complete longest common string, then each full match
 " enable this for bash compatible behaviour
-" set wildmode=longest,full
+set wildmode=longest,full
+
+" wildignore 
+set wildignore+=*/tmp/*,*.so,*.sw?,*.zip,*.pyc,*.pyo
+" } wild* settings "
 
 "-------------------------------------------------------------------------------
 " Eigene Befehle
@@ -538,39 +539,61 @@ cnoremap help vertical help
 " Resize Vsplits on window resize 
 au VimResized * exe "normal! \<c-w>="
 
-" configure a directory for vim-notes
-let g:notes_directories = ['~/ownCloud/notes']
-let g:notes_smart_quotes = 0
 
 " prevent pyflakes from polluting quickfix
 let g:pyflakes_use_quickfix = 0
 
-" Syntastic
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_loc_list_height=3
-let g:syntastic_check_on_open=1
 
-" puppet-lint is incredibly strict!
-let g:loaded_syntastic_puppet_puppetlint_checker=1
-"let g:syntastic_puppet_puppetlint_args='--no-autoloader_layout-check'
 
 " map ,bg to toggle background
 map <Leader>bg :let &background = ( &background == "dark"? "light" : "dark" )<CR>
-
-" Mutt stuff
+" Plugin settings {
+" notes stuff { "
+" configure a directory for vim-notes
+let g:notes_directories = ['~/ownCloud/notes']
+let g:notes_smart_quotes = 0
+" } notes stuff "
+" Syntastic stuff {
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_loc_list_height=3
+let g:syntastic_check_on_open=1
+" puppet-lint is incredibly strict!
+let g:loaded_syntastic_puppet_puppetlint_checker=1
+"let g:syntastic_puppet_puppetlint_args='--no-autoloader_layout-check'
+" }
+" Mutt stuff {
 let g:MuttSigStripString='Hauptsitz'
 
 let g:snips_author='Sven Hergenhahn'
 let g:snips_email='sven.hergenhahn@1und1.de'
-
-" fugitive stuff
+" }
+" fugitive stuff {
 " fugitive needs an english speaking git
 let g:fugitive_git_executable = 'LANG=en_US.UTF-8 git'
-
-"Ctrl-P stuff
+" }
+"Ctrl-P stuff {
 "let g:ctrlp_cmd = 'CtrlPBuffer'
+nnoremap <leader>p :CtrlPBuffer<cr>
+" }
+" UltiSnips stuff { "
+let g:UltiSnipsListSnippets='<m-k>'
+let g:UltiSnipsExpandTrigger='<c-k>'
+let g:UltiSnipsJumpForwardTrigger='<c-k>'
+let g:UltiSnipsJumpBackwardTrigger='<c-s-j>'
+" } UltiSnips stuff "
+" } end Plugin settings "
+" vim-shell { "
+let g:shell_mappings_enabled = 0
+"Since no mappings will be defined now you can add something like the following to your vimrc script:
+"inoremap <Leader>fs <C-o>:Fullscreen<CR>
+"nnoremap <Leader>fs :Fullscreen<CR>
+"inoremap <Leader>op <C-o>:Open<CR>
+"nnoremap <Leader>op :Open<CR>
+" } vim-shell "
 
 autocmd FileType perl source ~/.vim/svh_perl
+autocmd FileType vim set foldmethod=marker
+
 
 " source host .vimrc
 let s:host_vimrc = $HOME . '/.vim/vimrc.' . hostname()
@@ -579,9 +602,4 @@ if filereadable(s:host_vimrc)
 endif
 
 
-let g:UltiSnipsListSnippets='<m-k>'
-let g:UltiSnipsExpandTrigger='<c-k>'
-let g:UltiSnipsJumpForwardTrigger='<c-k>'
-let g:UltiSnipsJumpBackwardTrigger='<c-s-j>'
 
-let g:load_templates="no"
