@@ -13,43 +13,45 @@ call vundle#rc()
 
 " Vundle {1 "
 " github plugins
-"Bundle 'ervandew/supertab'
-Bundle 'Glench/Vim-Jinja2-Syntax'
-Bundle 'SirVer/ultisnips'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'bronson/vim-visual-star-search'
-Bundle 'caio/querycommandcomplete.vim'
-Bundle 'chrisbra/SudoEdit.vim'
-Bundle 'dbb/vim-gummybears-colorscheme'
-Bundle 'gmarik/vundle'
-Bundle 'godlygeek/tabular'
-Bundle 'honza/vim-snippets'
-Bundle 'kevinw/pyflakes-vim'
-Bundle 'kien/ctrlp.vim'
-Bundle 'mileszs/ack.vim'
-"Bundle 'msanders/snipmate.vim'
-Bundle 'neilhwatson/vim_cf3'
-Bundle 'rodjek/vim-puppet'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/syntastic'
-Bundle 'svenXY/pydoc.vim'
-Bundle 'svenXY/vim-muttmail'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'vim-scripts/Bexec'
-Bundle 'vim-scripts/buftabs'
-Bundle 'vim-scripts/taglist.vim'
-Bundle 'vim-scripts/vcscommand.vim'
-Bundle 'vim-scripts/vimcommander'
-Bundle 'xolox/vim-misc'
-Bundle 'xolox/vim-notes'
-Bundle 'xolox/vim-shell'
+"Plugin 'ervandew/supertab'
+Plugin 'Glench/Vim-Jinja2-Syntax'
+Plugin 'SirVer/ultisnips'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'bronson/vim-visual-star-search'
+Plugin 'caio/querycommandcomplete.vim'
+Plugin 'chrisbra/SudoEdit.vim'
+Plugin 'dbb/vim-gummybears-colorscheme'
+Plugin 'gmarik/vundle'
+Plugin 'godlygeek/tabular'
+Plugin 'honza/vim-snippets'
+Plugin 'kevinw/pyflakes-vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'mileszs/ack.vim'
+"Plugin 'msanders/snipmate.vim'
+Plugin 'neilhwatson/vim_cf3'
+Plugin 'rodjek/vim-puppet'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'svenXY/pydoc.vim'
+Plugin 'svenXY/vim-muttmail'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'vim-scripts/Bexec'
+Plugin 'vim-scripts/buftabs'
+Plugin 'vim-scripts/taglist.vim'
+Plugin 'vim-scripts/vcscommand.vim'
+Plugin 'vim-scripts/vimcommander'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-notes'
+Plugin 'xolox/vim-shell'
+Plugin 'krisajenkins/vim-pipe'
+Plugin 'christoomey/vim-tmux-navigator'
 
 " Non-github plugins
-Bundle 'http://repo.or.cz/r/vcscommand.git'
+Plugin 'http://repo.or.cz/r/vcscommand.git'
 " 1} "
 
 filetype plugin indent on
@@ -205,6 +207,8 @@ set foldignore=#
 " Text für Darstellung einer Faltung (Std)
 set foldtext=foldtext()
 
+" open/close fold with space
+nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 "-------------------------------------------------------------------------------
 " Maus-Konfiguration
 "-------------------------------------------------------------------------------
@@ -521,8 +525,9 @@ set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 " put active file directory into %%
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
-" mute highlighting
-nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
+" mute highlighting && redraw screen
+" used here because vim-tmux-nav eats Ctrl-L
+nnoremap <silent> L :<C-u>nohlsearch<CR><C-l>
 
 " fixing the & command
 nnoremap & :&&<CR>
