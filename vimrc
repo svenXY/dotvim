@@ -14,6 +14,7 @@ call vundle#rc()
 " Vundle {1 "
 " github plugins
 "Plugin 'ervandew/supertab'
+"Plugin 'msanders/snipmate.vim'
 Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'SirVer/ultisnips'
 Plugin 'Valloric/YouCompleteMe'
@@ -21,14 +22,16 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'bronson/vim-visual-star-search'
 Plugin 'caio/querycommandcomplete.vim'
 Plugin 'chrisbra/SudoEdit.vim'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'dbb/vim-gummybears-colorscheme'
 Plugin 'gmarik/vundle'
 Plugin 'godlygeek/tabular'
 Plugin 'honza/vim-snippets'
 Plugin 'kevinw/pyflakes-vim'
 Plugin 'kien/ctrlp.vim'
+Plugin 'krisajenkins/vim-pipe'
 Plugin 'mileszs/ack.vim'
-"Plugin 'msanders/snipmate.vim'
 Plugin 'neilhwatson/vim_cf3'
 Plugin 'rodjek/vim-puppet'
 Plugin 'scrooloose/nerdtree'
@@ -47,8 +50,6 @@ Plugin 'vim-scripts/vimcommander'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-notes'
 Plugin 'xolox/vim-shell'
-Plugin 'krisajenkins/vim-pipe'
-Plugin 'christoomey/vim-tmux-navigator'
 
 " Non-github plugins
 Plugin 'http://repo.or.cz/r/vcscommand.git'
@@ -61,6 +62,14 @@ let mapleader = ","
 nnoremap \ ,
 
 nnoremap <silent> <F4>  :NERDTreeToggle<CR>
+
+set hidden
+set colorcolumn=80
+set cursorline
+
+set ttyfast
+" keep more context when scrolling off the end of a buffer
+set scrolloff=5
 
 "-------------------------------------------------------------------------------
 " Bildschirm-Darstellung
@@ -84,17 +93,21 @@ set title
 set number
 set relativenumber
 
-" Tabulator und Zeilenende NICHT anzeigen (siehe lcs = listchars)
-set nolist
+" Tabulator, space  und Zeilenende anzeigen (siehe lcs = listchars)
+set list listchars=tab:»·,trail:·
+:x
 
-set splitright splitbelow
+
+
 "-------------------------------------------------------------------------------
 " Zeilenumbruch
 "-------------------------------------------------------------------------------
 
 " Bildschirmrand, innerhalb dem während Texteingabe umgebrochen wird (0=aus)
 set wrapmargin=0
-
+"
+" auto load files if vim detects they have been changed outside of Vim
+set autoread
 "-------------------------------------------------------------------------------
 " Dateioperationen
 "-------------------------------------------------------------------------------
@@ -118,7 +131,7 @@ set nobackup
 " Such- und Ersetzungs-Optionen
 "-------------------------------------------------------------------------------
 
-"" better use Ack() plugin and keep grep at normal
+"" better use Ag() plugin and keep grep at normal
 "set grepprg=ack-grep\ -H\ --nocolor\ --nogroup
 "
 " Beim Suchen über Textanfang/ende hinausspringen
@@ -548,14 +561,17 @@ au VimResized * exe "normal! \<c-w>="
 " prevent pyflakes from polluting quickfix
 let g:pyflakes_use_quickfix = 0
 
-
+" stolen from https://bitbucket.org/sjl/dotfiles/src/tip/vim/vimrc
+" Keep search matches in the middle of the window.
+nnoremap n nzzzv
+nnoremap N Nzzzv
 
 " map ,bg to toggle background
 map <Leader>bg :let &background = ( &background == "dark"? "light" : "dark" )<CR>
 " Plugin settings {
 " notes stuff { "
 " configure a directory for vim-notes
-let g:notes_directories = ['~/ownCloud/notes']
+let g:notes_directories = ['~/notes']
 let g:notes_smart_quotes = 0
 " } notes stuff "
 " Syntastic stuff {
@@ -608,3 +624,4 @@ endif
 
 
 
+Bundle 'rking/ag.vim'
