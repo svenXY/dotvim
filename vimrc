@@ -2,6 +2,7 @@
 " "~/.vimrc" Konfigurations-Datei fuer den Vim
 "-------------------------------------------------------------------------------
 set nocompatible
+set encoding=utf-8
 filetype off
 
 " make ctrl-q and ctrl-s work in vim
@@ -15,44 +16,48 @@ call vundle#rc()
 " github plugins
 "Plugin 'ervandew/supertab'
 "Plugin 'msanders/snipmate.vim'
-Plugin 'Glench/Vim-Jinja2-Syntax'
+Plugin 'lepture/vim-jinja'
 Plugin 'SirVer/ultisnips'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'bling/vim-airline'
+Plugin 'bling/vim-bufferline'
 Plugin 'bronson/vim-visual-star-search'
 Plugin 'caio/querycommandcomplete.vim'
 Plugin 'chrisbra/SudoEdit.vim'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'dbb/vim-gummybears-colorscheme'
+"Plugin 'christoomey/vim-tmux-navigator'
+"Plugin 'dbb/vim-gummybears-colorscheme'
 Plugin 'gmarik/vundle'
 Plugin 'godlygeek/tabular'
 Plugin 'honza/vim-snippets'
 Plugin 'kevinw/pyflakes-vim'
 Plugin 'kien/ctrlp.vim'
-Plugin 'krisajenkins/vim-pipe'
-Plugin 'mileszs/ack.vim'
-Plugin 'neilhwatson/vim_cf3'
+Plugin 'rking/ag.vim'
+"Plugin 'krisajenkins/vim-pipe'
+"Plugin 'neilhwatson/vim_cf3'
 Plugin 'rodjek/vim-puppet'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
-Plugin 'svenXY/pydoc.vim'
+"Plugin 'svenXY/pydoc.vim'
 Plugin 'svenXY/vim-muttmail'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'vim-scripts/Bexec'
-Plugin 'vim-scripts/buftabs'
+"Plugin 'vim-scripts/buftabs'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'vim-scripts/vcscommand.vim'
-Plugin 'vim-scripts/vimcommander'
+"Plugin 'vim-scripts/vimcommander'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-notes'
 Plugin 'xolox/vim-shell'
+Plugin 'svenXY/vim-pputil'
+" local stuff
+Plugin 'svenXY/own_stuff'
 
 " Non-github plugins
-Plugin 'http://repo.or.cz/r/vcscommand.git'
+"Plugin 'http://repo.or.cz/r/vcscommand.git'
 " 1} "
 
 filetype plugin indent on
@@ -67,7 +72,11 @@ set hidden
 set colorcolumn=80
 set cursorline
 
+" performance stuff
 set ttyfast
+set lazyredraw
+" }
+
 " keep more context when scrolling off the end of a buffer
 set scrolloff=5
 
@@ -95,9 +104,10 @@ set relativenumber
 
 " Tabulator, space  und Zeilenende anzeigen (siehe lcs = listchars)
 set list listchars=tab:»·,trail:·
-:x
 
-
+" Open new split panes to right and bottom, which feels more natural
+set splitbelow
+set splitright
 
 "-------------------------------------------------------------------------------
 " Zeilenumbruch
@@ -527,13 +537,13 @@ nnoremap <leader># :nohl<cr>
 
 " buftabs settings
 set laststatus=2
-:let g:buftabs_in_statusline=1
+let g:buftabs_in_statusline=1
 
-set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
-":set statusline+=%=        " Switch to the right side
-":set statusline+=%l        " Current line
-":set statusline+=/         " Separator
-":set statusline+=%L        " Total lines
+"set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+"":set statusline+=%=        " Switch to the right side
+"":set statusline+=%l        " Current line
+"":set statusline+=/         " Separator
+"":set statusline+=%L        " Total lines
 
 " put active file directory into %%
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
@@ -602,7 +612,24 @@ let g:UltiSnipsExpandTrigger='<c-k>'
 let g:UltiSnipsJumpForwardTrigger='<c-k>'
 let g:UltiSnipsJumpBackwardTrigger='<c-s-j>'
 " } UltiSnips stuff "
+" airline stuff { "
+set noshowmode
+let g:airline_powerline_fonts = 1
+let g:bufferline_echo = 0
+let g:airline#extensions#tabline#show_buffers = 1
+let g:airline#extensions#tabline#enabled = 1
+"set fillchars+=stl:\ ,stlnc:\
+" } airline stuff "
+" nerdcommenter stuff { "
+let g:NERDCustomDelimiters = {
+            \ 'puppet': { 'left': '#', 'leftAlt': '/*', 'rightAlt': '*/' },
+            \ }
+" } nerdcommenter stuff "
 " } end Plugin settings "
+" ruby stuff {
+" ruby path if you are using rbenv
+let g:ruby_path = system('echo $HOME/.rbenv/shims')
+" }
 " vim-shell { "
 let g:shell_mappings_enabled = 0
 "Since no mappings will be defined now you can add something like the following to your vimrc script:
@@ -613,15 +640,26 @@ let g:shell_mappings_enabled = 0
 " } vim-shell "
 
 autocmd FileType perl source ~/.vim/svh_perl
+
+" Filetype ruby {
+autocmd FileType ruby set re=1
+" }
 autocmd FileType vim set foldmethod=marker
 
+" diff mode toggle { "
+nnoremap <silent> <Leader>df :call DiffToggle()<CR>
+
+function! DiffToggle()
+    if &diff
+        diffoff
+    else
+        diffthis
+    endif
+:endfunction
+" } diff mode toggle "
 
 " source host .vimrc
 let s:host_vimrc = $HOME . '/.vim/vimrc.' . hostname()
 if filereadable(s:host_vimrc)
   execute 'source ' . s:host_vimrc
 endif
-
-
-
-Bundle 'rking/ag.vim'
