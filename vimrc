@@ -1,6 +1,8 @@
 "-------------------------------------------------------------------------------
 " "~/.vimrc" Konfigurations-Datei fuer den Vim
 "-------------------------------------------------------------------------------
+runtime macros/matchit.vim
+
 set nocompatible
 set encoding=utf-8
 filetype off
@@ -27,11 +29,13 @@ Plugin 'caio/querycommandcomplete.vim'
 "Plugin 'chrisbra/SudoEdit.vim'
 Plugin 'christoomey/vim-tmux-navigator'
 "Plugin 'dbb/vim-gummybears-colorscheme'
+Plugin 'FelikZ/ctrlp-py-matcher'
 Plugin 'gmarik/vundle'
 Plugin 'godlygeek/tabular'
 Plugin 'honza/vim-snippets'
 Plugin 'kevinw/pyflakes-vim'
 Plugin 'kien/ctrlp.vim'
+Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'rking/ag.vim'
 "Plugin 'krisajenkins/vim-pipe'
 "Plugin 'neilhwatson/vim_cf3'
@@ -44,20 +48,23 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
-Plugin 'vim-scripts/Bexec'
-"Plugin 'vim-scripts/buftabs'
+Plugin 'tpope/vim-eunuch'
+" Bexec seems to break Omnicomplete
+"Plugin 'vim-scripts/Bexec'
+Plugin 'vim-scripts/bufkill.vim'
+Plugin 'vim-scripts/buftabs'
 Plugin 'vim-scripts/taglist.vim'
-Plugin 'vim-scripts/vcscommand.vim'
+"Plugin 'vim-scripts/vcscommand.vim'
 "Plugin 'vim-scripts/vimcommander'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-notes'
 Plugin 'xolox/vim-shell'
 Plugin 'svenXY/vim-pputil'
-" local stuff
+"" local stuff
 Plugin 'svenXY/own_stuff'
 
 " Non-github plugins
-"Plugin 'http://repo.or.cz/r/vcscommand.git'
+Plugin 'http://repo.or.cz/r/vcscommand.git'
 " 1} "
 
 filetype plugin indent on
@@ -136,6 +143,7 @@ set modelines=5
 
 " KEINE Backupdateien erzeugen (Dateiname + "~" dahinter)
 set nobackup
+set noswapfile
 
 "-------------------------------------------------------------------------------
 " Such- und Ersetzungs-Optionen
@@ -160,7 +168,11 @@ set incsearch
 set hlsearch
 
 " Flag "g=global" bei Substitute-Kommando (":s") automatisch setzen
-" set gdefault
+set gdefault
+"
+" always search very magic (i.e. like pcre)
+"nnoremap / /\v
+"vnoremap / /\v
 
 "-------------------------------------------------------------------------------
 " Programmierung
@@ -184,6 +196,7 @@ set smartindent
 set nocopyindent
 set nopreserveindent
 
+set visualbell
 "-------------------------------------------------------------------------------
 " Syntax-Highlighting
 "-------------------------------------------------------------------------------
@@ -314,10 +327,11 @@ set esckeys
 " wild* settings { "
 " Complete longest common string, then each full match
 " enable this for bash compatible behaviour
-set wildmode=longest,full
+set wildmenu
+set wildmode=list:longest
 
 " wildignore 
-set wildignore+=*/tmp/*,*.so,*.sw?,*.zip,*.pyc,*.pyo
+set wildignore+=*.so,*.sw?,*.zip,*.pyc,*.pyo
 " } wild* settings "
 
 "-------------------------------------------------------------------------------
@@ -522,6 +536,11 @@ nnoremap <down> <nop>
 nnoremap <left> <nop>
 nnoremap <right> <nop>
 
+"Use the arrows to something usefull
+map <right> :BF<CR>
+map <left> :BB<CR>
+map <up> :BD<CR>
+
 " avoid cursor keys for command history
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
@@ -534,6 +553,10 @@ nnoremap <leader>#k :execute "leftabove split " . bufname("#")<cr>
 nnoremap <leader>w :match Error /\v\s+$/<cr>
 nnoremap <leader>W :match<cr>
 nnoremap <leader># :nohl<cr>
+
+nnoremap <leader><space> :noh<cr>
+nnoremap <tab> %
+vnoremap <tab> %
 
 " buftabs settings
 set laststatus=2
@@ -603,7 +626,16 @@ let g:snips_email='sven.hergenhahn@1und1.de'
 let g:fugitive_git_executable = 'LANG=en_US.UTF-8 git'
 " }
 "Ctrl-P stuff {
-"let g:ctrlp_cmd = 'CtrlPBuffer'
+" check http://blog.patspam.com/2014/super-fast-ctrlp for details
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+      \ --ignore .git
+      \ --ignore .svn
+      \ --ignore .hg
+      \ --ignore .DS_Store
+      \ --ignore "**/*.pyc"
+      \ -g ""'
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 nnoremap <leader>p :CtrlPBuffer<cr>
 " }
 " UltiSnips stuff { "
@@ -638,6 +670,12 @@ let g:shell_mappings_enabled = 0
 "inoremap <Leader>op <C-o>:Open<CR>
 "nnoremap <Leader>op :Open<CR>
 " } vim-shell "
+" rainbow parentheses { "
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+" } rainbow parentheses
 
 autocmd FileType perl source ~/.vim/svh_perl
 
