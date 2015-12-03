@@ -11,7 +11,7 @@ filetype off
 silent !stty -ixon > /dev/null 2>/dev/null
 
 " use vundle
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#rc()
 
 " Vundle {1 "
@@ -51,7 +51,7 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-eunuch'
 " Bexec seems to break Omnicomplete
 "Plugin 'vim-scripts/Bexec'
-Plugin 'vim-scripts/bufkill.vim'
+"Plugin 'vim-scripts/bufkill.vim'
 Plugin 'vim-scripts/buftabs'
 Plugin 'vim-scripts/taglist.vim'
 "Plugin 'vim-scripts/vcscommand.vim'
@@ -60,6 +60,7 @@ Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-notes'
 Plugin 'xolox/vim-shell'
 Plugin 'svenXY/vim-pputil'
+Plugin 'vim-scripts/Printer-Dialog'
 "" local stuff
 Plugin 'svenXY/own_stuff'
 
@@ -455,7 +456,7 @@ let VCSCommandResultBufferNameExtension = ".vcs"
 let VCSCommandDeleteOnHide = 1
 
 au FileType python set omnifunc=pythoncomplete#Complete
-autocmd BufNewFile,BufRead *.py compiler python
+"autocmd BufNewFile,BufRead *.py compiler python
 
 "if (v:version >= 700) 
 "	highlight SpellBad      ctermfg=Red         term=Reverse        guisp=Red       gui=undercurl   ctermbg=White 
@@ -537,9 +538,9 @@ nnoremap <left> <nop>
 nnoremap <right> <nop>
 
 "Use the arrows to something usefull
-map <right> :BF<CR>
-map <left> :BB<CR>
-map <up> :BD<CR>
+"map <right> :BF<CR>
+"map <left> :BB<CR>
+"map <up> :BD<CR>
 
 " avoid cursor keys for command history
 cnoremap <C-p> <Up>
@@ -636,7 +637,8 @@ let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
       \ --ignore "**/*.pyc"
       \ -g ""'
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-nnoremap <leader>p :CtrlPBuffer<cr>
+"conflicts with PrinterDialog
+"nnoremap <leader>p :CtrlPBuffer<cr>
 " }
 " UltiSnips stuff { "
 let g:UltiSnipsListSnippets='<m-k>'
