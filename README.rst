@@ -1,7 +1,7 @@
 ==========
 dotvim
 ==========
-My personal vimdot files (see the vimcast on vimcast.org for details)
+My personal vimdot files (see the vimcast on http://vimcasts.org for details)
 ---------------------------------------------------------------------
 
 To get it:
