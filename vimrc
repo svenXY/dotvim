@@ -10,65 +10,72 @@ filetype off
 " make ctrl-q and ctrl-s work in vim
 silent !stty -ixon > /dev/null 2>/dev/null
 
-" use vundle
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#rc()
+" vim-plug {1 "
+call plug#begin('~/.vim/plugged')
 
-" Vundle {1 "
 " github plugins
-"Plugin 'ervandew/supertab'
-"Plugin 'msanders/snipmate.vim'
-Plugin 'lepture/vim-jinja'
-Plugin 'SirVer/ultisnips'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'bling/vim-airline'
-Plugin 'bling/vim-bufferline'
-Plugin 'bronson/vim-visual-star-search'
-Plugin 'caio/querycommandcomplete.vim'
-"Plugin 'chrisbra/SudoEdit.vim'
-Plugin 'christoomey/vim-tmux-navigator'
-"Plugin 'dbb/vim-gummybears-colorscheme'
-Plugin 'FelikZ/ctrlp-py-matcher'
-Plugin 'gmarik/vundle'
-Plugin 'godlygeek/tabular'
-Plugin 'honza/vim-snippets'
-Plugin 'kevinw/pyflakes-vim'
-Plugin 'kien/ctrlp.vim'
-Plugin 'kien/rainbow_parentheses.vim'
-Plugin 'rking/ag.vim'
-"Plugin 'krisajenkins/vim-pipe'
-"Plugin 'neilhwatson/vim_cf3'
-Plugin 'rodjek/vim-puppet'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
-"Plugin 'svenXY/pydoc.vim'
-Plugin 'svenXY/vim-muttmail'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'tpope/vim-eunuch'
+Plug 'ervandew/supertab'
+"Plug 'msanders/snipmate.vim'
+Plug 'lepture/vim-jinja'
+Plug 'SirVer/ultisnips'
+function! BuildYCM(info)
+  if a:info.status == 'installed' || a:info.force
+    !./install.sh
+  endif
+endfunction
+Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+Plug 'altercation/vim-colors-solarized'
+Plug 'bling/vim-airline'
+Plug 'bling/vim-bufferline'
+Plug 'bronson/vim-visual-star-search'
+Plug 'caio/querycommandcomplete.vim'
+"Plug 'chrisbra/SudoEdit.vim'
+Plug 'christoomey/vim-tmux-navigator'
+"Plug 'dbb/vim-gummybears-colorscheme'
+Plug 'FelikZ/ctrlp-py-matcher'
+Plug 'gmarik/vundle'
+Plug 'godlygeek/tabular'
+Plug 'honza/vim-snippets'
+Plug 'kevinw/pyflakes-vim'
+Plug 'kien/ctrlp.vim'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'pearofducks/ansible-vim'
+Plug 'rking/ag.vim'
+"Plug 'krisajenkins/vim-pipe'
+"Plug 'neilhwatson/vim_cf3'
+Plug 'rodjek/vim-puppet'
+Plug 'scrooloose/nerdtree'
+"Plug 'scrooloose/syntastic'
+Plug 'neomake/neomake'
+"Plug 'svenXY/pydoc.vim'
+Plug 'svenXY/vim-muttmail'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-eunuch'
 " Bexec seems to break Omnicomplete
-"Plugin 'vim-scripts/Bexec'
-"Plugin 'vim-scripts/bufkill.vim'
-Plugin 'vim-scripts/buftabs'
-Plugin 'vim-scripts/taglist.vim'
-"Plugin 'vim-scripts/vcscommand.vim'
-"Plugin 'vim-scripts/vimcommander'
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-notes'
-Plugin 'xolox/vim-shell'
-Plugin 'svenXY/vim-pputil'
-Plugin 'vim-scripts/Printer-Dialog'
+"Plug 'vim-scripts/Bexec'
+"Plug 'vim-scripts/bufkill.vim'
+Plug 'vim-scripts/buftabs'
+Plug 'vim-scripts/taglist.vim'
+"Plug 'vim-scripts/vcscommand.vim'
+"Plug 'vim-scripts/vimcommander'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-notes'
+Plug 'xolox/vim-shell'
+Plug 'svenXY/vim-pputil'
+Plug 'vim-scripts/Printer-Dialog'
+Plug 'Raimondi/delimitMate'
 "" local stuff
-Plugin 'svenXY/own_stuff'
+Plug 'svenXY/own_stuff'
 
 " Non-github plugins
-Plugin 'http://repo.or.cz/r/vcscommand.git'
+Plug 'http://repo.or.cz/r/vcscommand.git'
+
+call plug#end()
 " 1} "
 
-filetype plugin indent on
 
 " set the leader
 let mapleader = ","
@@ -80,7 +87,7 @@ set hidden
 set colorcolumn=80
 set cursorline
 
-" performance stuff
+" performance stuff {1 "
 set ttyfast
 set lazyredraw
 " }
@@ -211,10 +218,12 @@ syntax on
 " (16 Stück: blue, darkblue, default, desert, elflord, evening, koehler,
 "            morning, murphy, pablo, peachpuff, ron, shine, torte, zellner)
 " TIPP: Auflisten mit: :colo TAB...
+
 set t_Co=16
 set background=dark
 let g:solarized_termcolors=16
 colorscheme solarized
+hi Normal ctermbg=none
 "colorscheme default
 
 "-------------------------------------------------------------------------------
@@ -552,16 +561,16 @@ nnoremap <leader>#j :execute "rightbelow split " . bufname("#")<cr>
 nnoremap <leader>#k :execute "leftabove split " . bufname("#")<cr>
 
 nnoremap <leader>w :match Error /\v\s+$/<cr>
-nnoremap <leader>W :match<cr>
+noremap <leader>W :match<cr>
 nnoremap <leader># :nohl<cr>
 
-nnoremap <leader><space> :noh<cr>
 nnoremap <tab> %
 vnoremap <tab> %
 
 " buftabs settings
 set laststatus=2
-let g:buftabs_in_statusline=1
+" next does not seem to work in first buffer
+"let g:buftabs_in_statusline=1
 
 "set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 "":set statusline+=%=        " Switch to the right side
@@ -573,8 +582,8 @@ let g:buftabs_in_statusline=1
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
 " mute highlighting && redraw screen
-" used here because vim-tmux-nav eats Ctrl-L
-nnoremap <silent> L :<C-u>nohlsearch<CR><C-l>
+" used here because vim-tmux-nav needs Ctrl-L
+nnoremap <silent> <leader><space> :<C-u>nohlsearch<CR><C-l>
 
 " fixing the & command
 nnoremap & :&&<CR>
@@ -608,14 +617,6 @@ map <Leader>bg :let &background = ( &background == "dark"? "light" : "dark" )<CR
 let g:notes_directories = ['~/notes']
 let g:notes_smart_quotes = 0
 " } notes stuff "
-" Syntastic stuff {
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_loc_list_height=3
-let g:syntastic_check_on_open=1
-" puppet-lint is incredibly strict!
-let g:loaded_syntastic_puppet_puppetlint_checker=1
-"let g:syntastic_puppet_puppetlint_args='--no-autoloader_layout-check'
-" }
 " Mutt stuff {
 let g:MuttSigStripString='Hauptsitz'
 
@@ -659,7 +660,9 @@ let g:NERDCustomDelimiters = {
             \ 'puppet': { 'left': '#', 'leftAlt': '/*', 'rightAlt': '*/' },
             \ }
 " } nerdcommenter stuff "
-" } end Plugin settings "
+" delimitMate stuff { "
+au FileType python let b:delimitMate_nesting_quotes = ['"', "'"]
+" } delimitMate stuff "
 " ruby stuff {
 " ruby path if you are using rbenv
 let g:ruby_path = system('echo $HOME/.rbenv/shims')
@@ -678,6 +681,14 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 " } rainbow parentheses
+" neomake { "
+" Run NeoMake on read and write operations
+autocmd! BufReadPost,BufWritePost * Neomake
+let g:neomake_serialize = 1
+let g:neomake_serialize_abort_on_error = 1
+" } neomake
+" } end Plugin settings "
+
 
 autocmd FileType perl source ~/.vim/svh_perl
 
