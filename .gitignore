@@ -12,3 +12,4 @@ vimrc.*
 # Can also ignore all directories and files in a directory.
 bundle/**
 ~bundle/vundle
+plugged

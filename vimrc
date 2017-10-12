@@ -331,7 +331,7 @@ if has("autocmd")
 endif
 
 " Required to be able to use keypad keys and map missed escape sequences
-set esckeys
+" set esckeys
 
 
 " wild* settings { "
