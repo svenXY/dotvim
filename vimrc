@@ -1,4 +1,4 @@
-"-------------------------------------------------------------------------------
+"-------------------------------------------------------------------------------{}
 " "~/.vimrc" Konfigurations-Datei fuer den Vim
 "-------------------------------------------------------------------------------
 runtime macros/matchit.vim
@@ -14,6 +14,7 @@ silent !stty -ixon > /dev/null 2>/dev/null
 call plug#begin('~/.vim/plugged')
 
 " github plugins
+Plug 'FooSoft/vim-argwrap'
 Plug 'ervandew/supertab'
 "Plug 'msanders/snipmate.vim'
 Plug 'lepture/vim-jinja'
@@ -25,7 +26,8 @@ function! BuildYCM(info)
 endfunction
 Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 Plug 'altercation/vim-colors-solarized'
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'bling/vim-bufferline'
 Plug 'bronson/vim-visual-star-search'
 Plug 'caio/querycommandcomplete.vim'
@@ -33,13 +35,15 @@ Plug 'caio/querycommandcomplete.vim'
 Plug 'christoomey/vim-tmux-navigator'
 "Plug 'dbb/vim-gummybears-colorscheme'
 Plug 'FelikZ/ctrlp-py-matcher'
-Plug 'gmarik/vundle'
+Plug 'freitass/todo.txt-vim'
+"Plug 'gmarik/vundle'
 Plug 'godlygeek/tabular'
 Plug 'honza/vim-snippets'
 Plug 'kevinw/pyflakes-vim'
 Plug 'kien/ctrlp.vim'
 Plug 'kien/rainbow_parentheses.vim'
-Plug 'pearofducks/ansible-vim'
+Plug 'MicahElliott/Rocannon'
+"Plug 'pearofducks/ansible-vim'
 Plug 'rking/ag.vim'
 "Plug 'krisajenkins/vim-pipe'
 "Plug 'neilhwatson/vim_cf3'
@@ -54,6 +58,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-eunuch'
+Plug 'brendonrapp/smyck-vim'
 " Bexec seems to break Omnicomplete
 "Plug 'vim-scripts/Bexec'
 "Plug 'vim-scripts/bufkill.vim'
@@ -81,7 +86,7 @@ call plug#end()
 let mapleader = ","
 nnoremap \ ,
 
-nnoremap <silent> <F4>  :NERDTreeToggle<CR>
+nnoremap <silent> <F7>  :NERDTreeToggle<CR>
 
 set hidden
 set colorcolumn=80
@@ -221,9 +226,10 @@ syntax on
 
 set t_Co=16
 set background=dark
-let g:solarized_termcolors=16
-colorscheme solarized
-hi Normal ctermbg=none
+"let g:solarized_termcolors=16
+"colorscheme solarized
+"hi Normal ctermbg=none
+colorscheme smyck
 "colorscheme default
 
 "-------------------------------------------------------------------------------
@@ -417,9 +423,9 @@ nnoremap   <F5> :ls<CR>:b
 
 " Alle Register anzeigen, nach Auswahl einfuegen
 fu! RegList()
-	reg
-	let A=input("#?")
-	execute "normal \"".A."p<return>"
+    reg
+    let A=input("#?")
+    execute "normal \"".A."p<return>"
 endfunction
 
 nnoremap <F6> :call RegList()<cr>
@@ -468,27 +474,28 @@ au FileType python set omnifunc=pythoncomplete#Complete
 "autocmd BufNewFile,BufRead *.py compiler python
 
 "if (v:version >= 700) 
-"	highlight SpellBad      ctermfg=Red         term=Reverse        guisp=Red       gui=undercurl   ctermbg=White 
-"	highlight SpellCap      ctermfg=Green       term=Reverse        guisp=Green     gui=undercurl   ctermbg=White 
-"	highlight SpellLocal    ctermfg=Cyan        term=Underline      guisp=Cyan      gui=undercurl   ctermbg=White 
-"	highlight SpellRare     ctermfg=Magenta     term=underline      guisp=Magenta   gui=undercurl   ctermbg=White 
+"   highlight SpellBad      ctermfg=Red         term=Reverse        guisp=Red       gui=undercurl   ctermbg=White 
+"   highlight SpellCap      ctermfg=Green       term=Reverse        guisp=Green     gui=undercurl   ctermbg=White 
+"   highlight SpellLocal    ctermfg=Cyan        term=Underline      guisp=Cyan      gui=undercurl   ctermbg=White 
+"   highlight SpellRare     ctermfg=Magenta     term=underline      guisp=Magenta   gui=undercurl   ctermbg=White 
 "endif " version 7+ 
 
 fu! DoRunPyBuffer2()
-	pclose! " force preview window closed
-	setlocal ft=python
+    pclose! " force preview window closed
+    setlocal ft=python
 
-	" copy the buffer into a new window, then run that buffer through python
-	sil %y a | below new | sil put a | sil %!python -
-	" indicate the output window as the current previewwindow
-	setlocal previewwindow ro nomodifiable nomodified
+    " copy the buffer into a new window, then run that buffer through python
+    sil %y a | below new | sil put a | sil %!python -
+    " indicate the output window as the current previewwindow
+    setlocal previewwindow ro nomodifiable nomodified
 
-	" back into the original window
-	winc p
+    " back into the original window
+    winc p
 endfu
 
 command! RunPyBuffer call DoRunPyBuffer2()
-nnoremap <F7> :RunPyBuffer<CR>
+" disabled! F7 is currently used for NerdTree
+" nnoremap <F7> :RunPyBuffer<CR>
 
 " cfengine stuff
 au BufRead,BufNewFile *.cf set ft=cf3
@@ -687,10 +694,17 @@ autocmd! BufReadPost,BufWritePost * Neomake
 let g:neomake_serialize = 1
 let g:neomake_serialize_abort_on_error = 1
 " } neomake
+" AirlineTheme { "
+let g:airline_theme='papercolor'
+" } AirlineTheme
+" ArgWrap { "
+nnoremap <silent> <leader>a :ArgWrap<CR>
+" } ArgWrap
 " } end Plugin settings "
 
 
-autocmd FileType perl source ~/.vim/svh_perl
+" hjardly use perl these days...
+" autocmd FileType perl source ~/.vim/svh_perl
 
 " Filetype ruby {
 autocmd FileType ruby set re=1
@@ -714,3 +728,4 @@ let s:host_vimrc = $HOME . '/.vim/vimrc.' . hostname()
 if filereadable(s:host_vimrc)
   execute 'source ' . s:host_vimrc
 endif
+
