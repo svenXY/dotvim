@@ -14,17 +14,27 @@ silent !stty -ixon > /dev/null 2>/dev/null
 call plug#begin('~/.vim/plugged')
 
 " github plugins
-Plug 'FooSoft/vim-argwrap'
-Plug 'ervandew/supertab'
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
+"Plug 'FooSoft/vim-argwrap'
+"Plug 'ervandew/supertab'
 "Plug 'msanders/snipmate.vim'
 Plug 'lepture/vim-jinja'
-Plug 'SirVer/ultisnips'
-function! BuildYCM(info)
-  if a:info.status == 'installed' || a:info.force
-    !./install.sh
-  endif
-endfunction
-Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+"Plug 'SirVer/ultisnips'
+Plug 'zchee/deoplete-jedi'
+"function! BuildYCM(info)
+"  if a:info.status == 'installed' || a:info.force
+"    !./install.sh
+"  endif
+"endfunction
+"Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 Plug 'altercation/vim-colors-solarized'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -84,6 +94,10 @@ Plug 'http://repo.or.cz/r/vcscommand.git'
 call plug#end()
 " 1} "
 
+" python stuff {1
+let g:python_host_prog  = $HOME."/.pyenv/versions/neovim2/bin/python"
+let g:python3_host_prog = $HOME."/.pyenv/versions/neovim3/bin/python"
+"} python stuff
 
 " set the leader
 let mapleader = ","
@@ -533,10 +547,6 @@ autocmd BufReadPost *
   \   exe "normal g`\"" |
   \ endif
 
-" SuperTab settings
-let g:SuperTabLongestEnhanced=1
-let g:SuperTabLongestHighlight=1
-
 " Bubble single lines
 nmap <C-Up> [e
 nmap <C-Down> ]e
@@ -651,12 +661,9 @@ let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 "conflicts with PrinterDialog
 "nnoremap <leader>p :CtrlPBuffer<cr>
 " }
-" UltiSnips stuff { "
-let g:UltiSnipsListSnippets='<m-k>'
-let g:UltiSnipsExpandTrigger='<c-k>'
-let g:UltiSnipsJumpForwardTrigger='<c-k>'
-let g:UltiSnipsJumpBackwardTrigger='<c-s-j>'
-" } UltiSnips stuff "
+" neosnippets stuff { "
+let g:neosnippet#snippets_directory='~/.snippets'
+" } neosnippets stuff "
 " airline stuff { "
 set noshowmode
 let g:airline_powerline_fonts = 1
@@ -703,6 +710,32 @@ let g:airline_theme='papercolor'
 " ArgWrap { "
 nnoremap <silent> <leader>a :ArgWrap<CR>
 " } ArgWrap
+" deoplete { "
+let g:deoplete#enable_at_startup = 1
+nnoremap <silent> <leader>a :ArgWrap<CR>
+" } deoplete
+"
+" neosnippets { "
+" Plugin key-mappings.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+"imap <expr><TAB>
+" \ pumvisible() ? "\<C-n>" :
+" \ neosnippet#expandable_or_jumpable() ?
+" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
+" } neosnippets
 " } end Plugin settings "
 
 
