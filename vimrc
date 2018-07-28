@@ -23,48 +23,28 @@ else
 endif
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
-"Plug 'FooSoft/vim-argwrap'
-"Plug 'ervandew/supertab'
-"Plug 'msanders/snipmate.vim'
 Plug 'lepture/vim-jinja'
-"Plug 'SirVer/ultisnips'
 Plug 'zchee/deoplete-jedi'
-"function! BuildYCM(info)
-"  if a:info.status == 'installed' || a:info.force
-"    !./install.sh
-"  endif
-"endfunction
-"Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 Plug 'altercation/vim-colors-solarized'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'bling/vim-bufferline'
 Plug 'bronson/vim-visual-star-search'
 Plug 'caio/querycommandcomplete.vim'
-"Plug 'chrisbra/SudoEdit.vim'
 Plug 'christoomey/vim-tmux-navigator'
-"Plug 'dbb/vim-gummybears-colorscheme'
 Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'freitass/todo.txt-vim'
-"Plug 'gmarik/vundle'
 Plug 'godlygeek/tabular'
-Plug 'honza/vim-snippets'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'kevinw/pyflakes-vim'
 Plug 'kien/ctrlp.vim'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'MicahElliott/Rocannon'
-"Plug 'pearofducks/ansible-vim'
-"Plug 'rking/ag.vim'
-"Plug 'krisajenkins/vim-pipe'
-"Plug 'neilhwatson/vim_cf3'
 Plug 'rodjek/vim-puppet'
 Plug 'scrooloose/nerdtree'
 Plug 'sotte/presenting.vim'
-"Plug 'scrooloose/syntastic'
 Plug 'neomake/neomake'
-"Plug 'svenXY/pydoc.vim'
 Plug 'svenXY/vim-muttmail'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
@@ -72,13 +52,8 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-eunuch'
 Plug 'brendonrapp/smyck-vim'
-" Bexec seems to break Omnicomplete
-"Plug 'vim-scripts/Bexec'
-"Plug 'vim-scripts/bufkill.vim'
 Plug 'vim-scripts/buftabs'
 Plug 'vim-scripts/taglist.vim'
-"Plug 'vim-scripts/vcscommand.vim'
-"Plug 'vim-scripts/vimcommander'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
 Plug 'xolox/vim-shell'
@@ -89,7 +64,8 @@ Plug 'Raimondi/delimitMate'
 Plug 'svenXY/own_stuff'
 
 " Non-github plugins
-Plug 'http://repo.or.cz/r/vcscommand.git'
+" below left as syntactical example
+" Plug 'http://repo.or.cz/r/vcscommand.git'
 
 call plug#end()
 " 1} "
@@ -447,7 +423,6 @@ endfunction
 
 nnoremap <F6> :call RegList()<cr>
 
-
 set fileformat=unix
 
 function! RunCmd(cmd)
@@ -473,8 +448,8 @@ vnoremap <tab> >gv
 vnoremap <s-tab> <gv
 
 " Tidy selected lines (or entire file) with _t:
-nnoremap <silent> _t :%!perltidy -q<Enter>
-vnoremap <silent> _t :!perltidy -q<Enter>
+"nnoremap <silent> _t :%!perltidy -q<Enter>
+"vnoremap <silent> _t :!perltidy -q<Enter>
 
 " aspell
 nnoremap  :w!<CR>:!aspell check %<CR>:e! %<CR>
@@ -484,44 +459,11 @@ filetype plugin indent on
 " TaskList & TagList
 nnoremap <leader>T :TlistToggle<CR>
 
-let VCSCommandResultBufferNameExtension = ".vcs"
-let VCSCommandDeleteOnHide = 1
-
-au FileType python set omnifunc=pythoncomplete#Complete
-"autocmd BufNewFile,BufRead *.py compiler python
-
-"if (v:version >= 700) 
-"   highlight SpellBad      ctermfg=Red         term=Reverse        guisp=Red       gui=undercurl   ctermbg=White 
-"   highlight SpellCap      ctermfg=Green       term=Reverse        guisp=Green     gui=undercurl   ctermbg=White 
-"   highlight SpellLocal    ctermfg=Cyan        term=Underline      guisp=Cyan      gui=undercurl   ctermbg=White 
-"   highlight SpellRare     ctermfg=Magenta     term=underline      guisp=Magenta   gui=undercurl   ctermbg=White 
-"endif " version 7+ 
-
-fu! DoRunPyBuffer2()
-    pclose! " force preview window closed
-    setlocal ft=python
-
-    " copy the buffer into a new window, then run that buffer through python
-    sil %y a | below new | sil put a | sil %!python -
-    " indicate the output window as the current previewwindow
-    setlocal previewwindow ro nomodifiable nomodified
-
-    " back into the original window
-    winc p
-endfu
-
-command! RunPyBuffer call DoRunPyBuffer2()
-" disabled! F7 is currently used for NerdTree
-" nnoremap <F7> :RunPyBuffer<CR>
-
-" cfengine stuff
-au BufRead,BufNewFile *.cf set ft=cf3
-autocmd FileType cf3 set tabstop=2 shiftwidth=2 smarttab expandtab softtabstop=2 autoindent
-
 " reread docfiles, although most should now be in bundles
 :helptags ~/.vim/doc/
 
-autocmd! BufNewFile * silent! 0r ~/.vim/skel/tmpl.%:e
+" use skeleton files
+"autocmd! BufNewFile * silent! 0r ~/.vim/skel/tmpl.%:e
 
 fun! Getchar()
   let c = getchar()
@@ -539,23 +481,19 @@ endfun
 " Always show the menu, insert longest match
 set completeopt=menuone,longest
 
-" When editing a file, always jump to the last known cursor position.
-" Don't do it when the position is invalid or when inside an event handler
-" (happens when dropping a file on gvim).
-autocmd BufReadPost *
-  \ if line("'\"") > 0 && line("'\"") <= line("$") |
-  \   exe "normal g`\"" |
-  \ endif
-
+" Bubble lines {
 " Bubble single lines
 nmap <C-Up> [e
 nmap <C-Down> ]e
 " Bubble multiple lines
 vnoremap <C-Up> [egv
 vnoremap <C-Down> ]egv
+" } Bubble lines 
 
+" edit reread vimrc {
 :nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 :nnoremap <leader>sv :source $MYVIMRC<cr>
+" } edit reread vimrc
 
 " map jk to <esc>
 :inoremap jk <esc>
@@ -565,11 +503,6 @@ nnoremap <up> <nop>
 nnoremap <down> <nop>
 nnoremap <left> <nop>
 nnoremap <right> <nop>
-
-"Use the arrows to something usefull
-"map <right> :BF<CR>
-"map <left> :BB<CR>
-"map <up> :BD<CR>
 
 " avoid cursor keys for command history
 cnoremap <C-p> <Up>
@@ -589,14 +522,6 @@ vnoremap <tab> %
 
 " buftabs settings
 set laststatus=2
-" next does not seem to work in first buffer
-"let g:buftabs_in_statusline=1
-
-"set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
-"":set statusline+=%=        " Switch to the right side
-"":set statusline+=%l        " Current line
-"":set statusline+=/         " Separator
-"":set statusline+=%L        " Total lines
 
 " put active file directory into %%
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
@@ -619,7 +544,6 @@ cnoremap help vertical help
 
 " Resize Vsplits on window resize 
 au VimResized * exe "normal! \<c-w>="
-
 
 " prevent pyflakes from polluting quickfix
 let g:pyflakes_use_quickfix = 0
@@ -738,9 +662,6 @@ endif
 " } neosnippets
 " } end Plugin settings "
 
-
-" hjardly use perl these days...
-" autocmd FileType perl source ~/.vim/svh_perl
 
 " Filetype ruby {
 autocmd FileType ruby set re=1
