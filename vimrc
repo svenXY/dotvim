@@ -15,7 +15,8 @@ call plug#begin('~/.vim/plugged')
 
 " github plugins
 if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
 else
   Plug 'Shougo/deoplete.nvim'
   Plug 'roxma/nvim-yarp'
@@ -32,20 +33,25 @@ Plug 'bling/vim-bufferline'
 Plug 'bronson/vim-visual-star-search'
 Plug 'caio/querycommandcomplete.vim'
 Plug 'christoomey/vim-tmux-navigator'
+"Plug 'chrisbra/csv.vim'
+Plug '~/dev/csv.vim'
 Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'freitass/todo.txt-vim'
 Plug 'godlygeek/tabular'
 Plug '/usr/local/opt/fzf'
+Plug 'jmcantrell/vim-virtualenv'
 Plug 'junegunn/fzf.vim'
-Plug 'kevinw/pyflakes-vim'
-Plug 'kien/ctrlp.vim'
+"Plug 'kevinw/pyflakes-vim'
+"Plug 'kien/ctrlp.vim'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'MicahElliott/Rocannon'
 Plug 'rodjek/vim-puppet'
 Plug 'scrooloose/nerdtree'
 Plug 'sotte/presenting.vim'
-Plug 'neomake/neomake'
+"Plug 'neomake/neomake'
 Plug 'svenXY/vim-muttmail'
+Plug 'tmhedberg/SimpylFold'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
@@ -60,6 +66,10 @@ Plug 'xolox/vim-shell'
 Plug 'svenXY/vim-pputil'
 Plug 'vim-scripts/Printer-Dialog'
 Plug 'Raimondi/delimitMate'
+"Plug 'mechatroner/rainbow_csv'
+Plug 'easymotion/vim-easymotion'
+Plug 'idanarye/vim-merginal'
+Plug 'mhinz/vim-startify'
 "" local stuff
 Plug 'svenXY/own_stuff'
 
@@ -71,7 +81,12 @@ call plug#end()
 " 1} "
 
 " python stuff {1
-let g:python_host_prog  = $HOME."/.pyenv/versions/neovim2/bin/python"
+let g:loaded_python_provider = 0
+let g:loaded_ruby_provider = 0
+"let g:python_host_skip_check = 1
+"let g:python_host_prog  = $HOME."/.pyenv/versions/neovim2/bin/python"
+
+let g:python3_host_skip_check = 1
 let g:python3_host_prog = $HOME."/.pyenv/versions/neovim3/bin/python"
 "} python stuff
 
@@ -496,7 +511,10 @@ vnoremap <C-Down> ]egv
 " } edit reread vimrc
 
 " map jk to <esc>
-:inoremap jk <esc>
+inoremap jk <esc>
+" also for terminal
+tnoremap jk <C-\><C-n>
+tnoremap <Esc> <C-\><C-n>
 
 " noop arrow keys
 nnoremap <up> <nop>
@@ -622,12 +640,12 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 " } rainbow parentheses
-" neomake { "
-" Run NeoMake on read and write operations
-autocmd! BufReadPost,BufWritePost * Neomake
-let g:neomake_serialize = 1
-let g:neomake_serialize_abort_on_error = 1
-" } neomake
+"" neomake { "
+"" Run NeoMake on read and write operations
+"autocmd! BufReadPost,BufWritePost * Neomake
+"let g:neomake_serialize = 1
+"let g:neomake_serialize_abort_on_error = 1
+"" } neomake
 " AirlineTheme { "
 let g:airline_theme='papercolor'
 " } AirlineTheme
@@ -638,7 +656,24 @@ nnoremap <silent> <leader>a :ArgWrap<CR>
 let g:deoplete#enable_at_startup = 1
 nnoremap <silent> <leader>a :ArgWrap<CR>
 " } deoplete
-"
+" coc { "
+if has('nvim')
+    source ~/.vim/coc.vim
+endif
+" } coc
+" merginal { "
+nnoremap <Leader>gb :MerginalToggle<CR>
+" } merginal
+" vim-virtualenv { "
+if has('nvim')
+    let g:virtualenv_auto_activate = 1
+endif
+" } vim-virtualenv
+" SimpylFold { "
+if has('nvim')
+    let g:SimpylFold_docstring_preview = 1
+endif
+" } SimpylFold
 " neosnippets { "
 " Plugin key-mappings.
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
@@ -680,9 +715,81 @@ function! DiffToggle()
 :endfunction
 " } diff mode toggle "
 
+" fzf {
+let g:fzf_action = {
+      \ 'ctrl-s': 'split',
+      \ 'ctrl-v': 'vsplit'
+      \ }
+nnoremap <c-p> :FZF<cr>
+augroup fzf
+  autocmd!
+  autocmd! FileType fzf
+  autocmd  FileType fzf set laststatus=0 noshowmode noruler
+    \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+augroup END
+
+let g:fzf_nvim_statusline = 0 " disable statusline overwriting
+
+nnoremap <silent> <leader><space> :Files<CR>
+nnoremap <silent> <leader>a :Buffers<CR>
+nnoremap <silent> <leader>A :Windows<CR>
+nnoremap <silent> <leader>; :BLines<CR>
+nnoremap <silent> <leader>o :BTags<CR>
+nnoremap <silent> <leader>O :Tags<CR>
+nnoremap <silent> <leader>? :History<CR>
+nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
+nnoremap <silent> <leader>. :AgIn 
+
+nnoremap <silent> <leader>K :call SearchWordWithAg()<CR>
+vnoremap <silent> <leader>K :call SearchVisualSelectionWithAg()<CR>
+nnoremap <silent> <leader>gl :Commits<CR>
+nnoremap <silent> <leader>ga :BCommits<CR>
+nnoremap <silent> <leader>ft :Filetypes<CR>
+
+imap <C-x><C-f> <plug>(fzf-complete-file-ag)
+imap <C-x><C-l> <plug>(fzf-complete-line)
+
+function! SearchWordWithAg()
+  execute 'Ag' expand('<cword>')
+endfunction
+
+function! SearchVisualSelectionWithAg() range
+  let old_reg = getreg('"')
+  let old_regtype = getregtype('"')
+  let old_clipboard = &clipboard
+  set clipboard&
+  normal! ""gvy
+  let selection = getreg('"')
+  call setreg('"', old_reg, old_regtype)
+  let &clipboard = old_clipboard
+  execute 'Ag' selection
+endfunction
+
+function! SearchWithAgInDirectory(...)
+  call fzf#vim#ag(join(a:000[1:], ' '), extend({'dir': a:1}, g:fzf#vim#default_layout))
+endfunction
+command! -nargs=+ -complete=dir AgIn call SearchWithAgInDirectory(<f-args>)
+" } fzf
+" ripgrep {
+set grepprg=rg\ --vimgrep
+command! -bang -nargs=* Rg
+      \ call fzf#vim#grep(
+      \   'rg --column --line-number --no-heading --color=always --ignore-case '.shellescape(<q-args>), 1,
+      \   <bang>0 ? fzf#vim#with_preview('up:60%')
+      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+      \   <bang>0)
+" } ripgrep
+" terminal mode {
+  if has('nvim')
+      " tnoremap <ESC> <C-\><C-n>
+  endif
+" } terminal mode
+
 " source host .vimrc
 let s:host_vimrc = $HOME . '/.vim/vimrc.' . hostname()
 if filereadable(s:host_vimrc)
   execute 'source ' . s:host_vimrc
 endif
+
+au BufNewFile,BufRead /private/**/gopass**,/dev/shm/gopass.* setlocal noswapfile nobackup noundofile
 
