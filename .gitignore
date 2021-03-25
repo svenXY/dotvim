@@ -1,4 +1,5 @@
 # Can ignore specific files
+sessions/default.vim
 .netrwhist
 .svn
 vimrc.*
